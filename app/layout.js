@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./(components)/Header";
 import Footer from "./(components)/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Suspense } from "react";
 
 
 const geistSans = Geist({
@@ -65,8 +66,12 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       
       >
+        <Suspense>
         <Header/>
         {children}
+
+        </Suspense>
+     
         <Footer/>
       </body>
     </html>
