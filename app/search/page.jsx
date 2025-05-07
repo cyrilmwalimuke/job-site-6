@@ -3,106 +3,161 @@ import { ChevronLeft, ChevronRight, MapPin} from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link'
 import { IoReload, IoSearch } from 'react-icons/io5';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { jobs } from '@/data/jobs2';
+// import { jobs } from '@/data/jobs2';
 import JobCardSearch from '../(components)/JobCardSearch';
+import { BriefcaseIcon, SearchIcon, RefreshCw } from 'lucide-react';
 
 
+function getPaginationPages(currentPage, totalPages) {
+  const pages = [];
 
+  if (totalPages <= 5) {
+    // show all pages
+    for (let i = 1; i <= totalPages; i++) pages.push(i);
+  } else {
+    // always show first, last, current, and surrounding pages
+    pages.push(1);
 
-export function useQuery() {
-    const searchParams = useSearchParams();
-    return searchParams;
+    if (currentPage > 3) pages.push('...');
+
+    const startPage = Math.max(2, currentPage - 1);
+    const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = startPage; i <= endPage; i++) pages.push(i);
+
+    if (currentPage < totalPages - 2) pages.push('...');
+
+    pages.push(totalPages);
   }
 
-export default function Search({ sideBar, setSideBar }) {
+  return pages;
+}
 
-    function useQuery() {
-        const searchParams = useSearchParams();
-        return searchParams;
-      }
+
+
+
+
+// export function useQuery() {
+//     const searchParams = useSearchParams();
+//     return searchParams;
+//   }
+
+export default function Search2() {
+  const [page, setPage] = useState(1);
+  const limit = 6
+
+    // function useQuery() {
+    //     const searchParams = useSearchParams();
+    //     return searchParams;
+    //   }
   const [jobType, setJobType] = useState("");
-  let query  = useQuery().get("query")
+  // let query  = useQuery().get("query")
 const router = useRouter()
   const myRef = useRef(null);
 
-  const [searchTerm,setSearchTerm] = useState(query);
+  // const [searchTerm,setSearchTerm] = useState(query);
+  const [searchTerm,setSearchTerm] = useState('');
+  
+
   const [salaryRange, setSalaryRange] = useState("");
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [industry, setIndustry] = useState("");
    const [experienceLevel, setExperienceLevel] = useState([]);
   const [sortBy, setSortBy] = useState("relevance");
-const [data, setData] = useState(jobs);
+const [data, setData] = useState([]);
 const [jobLocation, setJobLocation] = useState("");
+const [totalDispalyPages, setTotalDispalyPages] = useState(0);
+
+
+
+console.log({
+  searchTerm,
+  salaryRange,
+  industry,
+  jobType,
+  experienceLevel,
+  jobLocation
+})
+
 
 
 
 const scrollToDiv = () => {
   myRef.current?.scrollIntoView({ behavior: 'smooth' });
 };
+ 
+// later
+// sortBy
+// order
+
 
   
 // const location = useLocation();
 // const pathname = location.pathname;
 
-useEffect(() => {
-  let filteredJobs = jobs;
-  if (searchTerm) {
-    filteredJobs = filteredJobs.filter(item =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }
-  setData(filteredJobs);
-},[searchTerm])
+// useEffect(() => {
+//   let filteredJobs = jobs;
+//   if (searchTerm) {
+//     filteredJobs = filteredJobs.filter(item =>
+//       item.title.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
+//   }
+//   setData(filteredJobs);
+// },[searchTerm])
 
-useEffect(()=>{
-  setSearchTerm(query);
+// useEffect(()=>{
+//   setSearchTerm(query);
 
-},[query])
+// },[query])
 
 
-const filterJobs = () => {
-    let filteredJobs = jobs;
+// const filterJobs = () => {
+//     let filteredJobs = jobs;
 
-    if (searchTerm) {
-        filteredJobs = filteredJobs.filter(item =>
-            item.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    }
+//     if (searchTerm) {
+//         filteredJobs = filteredJobs.filter(item =>
+//             item.title.toLowerCase().includes(searchTerm.toLowerCase())
+//         );
+//     }
 
-    if (jobLocation) {
-        filteredJobs = filteredJobs.filter(job => job.location.toLowerCase().includes(jobLocation.toLowerCase()));
-    }
+//     if (jobLocation) {
+//         filteredJobs = filteredJobs.filter(job => job.location.toLowerCase().includes(jobLocation.toLowerCase()));
+//     }
 
-    if (jobType) {
-        filteredJobs = filteredJobs.filter(job => job.type === jobType);
-    }
+//     if (jobType) {
+//         filteredJobs = filteredJobs.filter(job => job.type === jobType);
+//     }
 
-    if (salaryRange) {
-        const [min, max] = salaryRange.split('-').map(Number);
-        filteredJobs = filteredJobs.filter(job => job.salary >= min && (max ? job.salary <= max : true));
-    }
+//     if (salaryRange) {
+//         const [min, max] = salaryRange.split('-').map(Number);
+//         filteredJobs = filteredJobs.filter(job => job.salary >= min && (max ? job.salary <= max : true));
+//     }
 
-    if (industry) {
-        filteredJobs = filteredJobs.filter(job => job.industry === industry);
-    }
+//     if (industry) {
+//         filteredJobs = filteredJobs.filter(job => job.industry === industry);
+//     }
 
-    if (experienceLevel.length > 0) {
-        filteredJobs = filteredJobs.filter(job => experienceLevel.includes(job.experience));
-    }
+//     if (experienceLevel.length > 0) {
+//         filteredJobs = filteredJobs.filter(job => experienceLevel.includes(job.experience));
+//     }
 
     
-    if (sortBy === 'salary-high') {
-        filteredJobs = filteredJobs.sort((a, b) => b.salary - a.salary);
-    } else if (sortBy === 'salary-low') {
-        filteredJobs = filteredJobs.sort((a, b) => a.salary - b.salary);
-    }
+//     if (sortBy === 'salary-high') {
+//         filteredJobs = filteredJobs.sort((a, b) => b.salary - a.salary);
+//     } else if (sortBy === 'salary-low') {
+//         filteredJobs = filteredJobs.sort((a, b) => a.salary - b.salary);
+//     }
     
   
   
 
-    setData(filteredJobs);
-};
+//     setData(filteredJobs);
+// };
+
+
 
 const handleExperienceChange = (level) => {
     setExperienceLevel(prevLevels =>
@@ -111,7 +166,46 @@ const handleExperienceChange = (level) => {
         : [...prevLevels, level]
     );
   };
+
+
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const params = new URLSearchParams({
+          searchTerm: searchTerm,
+          salaryRange: salaryRange,
+          industry: industry,
+          type: jobType,
+          experienceLevel: experienceLevel.join(','),
+          location: jobLocation,
+          sort: 'createdAt',
+          order: 'desc',
+          limit: limit,
+          page: page,
+        })
+
+        const res = await fetch(`/api/get-jobs?${params.toString()}`)
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch listings')
+        }
+
+        const datafromApi = await res.json()
+        setData(datafromApi.jobsInDb)
+        setTotalPages(datafromApi.totalPages)
+        setTotalDispalyPages(datafromApi.totalDIsplayPages)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchJobs()
+  }, [searchTerm, salaryRange, industry, jobType, jobLocation,experienceLevel,page,limit])
  
+
 
   return (
     <main className="container mx-auto px-4 py-8 pt-20">
@@ -140,7 +234,7 @@ const handleExperienceChange = (level) => {
               <option value="internship">Internship</option>
             </select>
             <button onClick= {()=>{
-              filterJobs()
+              // filterJobs()
               scrollToDiv()
             }} className="flex cursor-pointer items-center bg-black text-white py-2 px-4 rounded-md">
               <IoSearch className="h-4 w-4 mr-2" /> Search
@@ -183,7 +277,7 @@ const handleExperienceChange = (level) => {
             <option value="0-50000">kshs 15k - kshs 50k</option>
             <option value="50000-100000">kshs 50k - kshs 100k</option>
             <option value="100000-350000">kshs 100k - kshs 350k</option>
-            <option value="350000">kshs 350k+</option>
+            <option value="350000-1000000">kshs 350k+</option>
           </select>
               </div>
               <div>
@@ -197,7 +291,9 @@ const handleExperienceChange = (level) => {
                   <option value="Retail">Retail</option>
                 </select>
               </div>
-              <button onClick={filterJobs} className="w-full py-2 bg-black cursor-pointer text-white rounded">Apply Filters</button>
+              <button 
+              // onClick={filterJobs}
+              className="w-full py-2 bg-black cursor-pointer text-white rounded">Apply Filters</button>
             </div>
           </div>
         </div>
@@ -205,7 +301,7 @@ const handleExperienceChange = (level) => {
         {/* Job Listings */}
         <div className="lg:col-span-3">
           <div className="flex justify-between items-center mb-6">
-            <p className="text-gray-600">Showing <span className="font-medium">{data.length}</span> jobs</p>
+            <p className="text-gray-600">Showing <span className="font-medium">{totalDispalyPages}</span> jobs</p>
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">Sort by:</span>
               <select className="p-2 border border-gray-300 rounded focus:outline-none" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
@@ -218,7 +314,7 @@ const handleExperienceChange = (level) => {
           </div>
 
 
-          {data.length === 0?(<div className='flex h-120 items-center justify-center font-semibold'>
+          {/* {data.length === 0?(<div className='flex h-120 items-center justify-center font-semibold'>
             <div>
               <p className='text-3xl'>No Jobs Found For the specified filters</p>
               <button onClick={
@@ -242,31 +338,94 @@ const handleExperienceChange = (level) => {
           </div>):
           (<div ref={myRef} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {data.map((job) => (
-              <JobCardSearch key={job.Id} job={job} />
+              <JobCardSearch key={job._Id} job={job} />
             ))}
-          </div>)}
+          </div>)} */}
+
+
+          {data.length === 0?(<div className="flex flex-col items-center justify-center text-center py-20 px-4 text-gray-600">
+      <BriefcaseIcon className="w-16 h-16 mb-4 text-blue-500" />
+      <h2 className="text-2xl font-semibold mb-2">No jobs found</h2>
+      <p className="text-base mb-6 max-w-md">
+        We couldn’t find any listings matching your criteria. Try broadening your search or checking back later.
+      </p>
+      <div className="flex gap-4">
+        <button
+          className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          onClick={() => window.location.reload()}
+        >
+          <RefreshCw className="w-4 h-4" />
+          Refresh
+        </button>
+        <button
+          className="inline-flex items-center gap-2 px-5 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
+          onClick={() => window.location.href = '/'}
+        >
+          <SearchIcon className="w-4 h-4" />
+          Go to Home
+        </button>
+      </div>
+    </div>):(
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+        {data.map((job) => (
+          <JobCardSearch key={job._Id} job={job} />
+        ))}
+
+      </div>
+    )}
 
       
 
-          {data.length===0?(null):(<div className='mt-5 flex items-center justify-center'>
+          
 
-<div className='text-white flex gap-3'>
-  <ChevronLeft size={25} className='bg-black px-2 py-1 rounded-md'/>
-{
-  [1,2,3,4,4,6,7].map((page)=>{
-    return (
-      <div className='text-xs py-1 px-2 bg-black rounded-md text-white'>
-        <p>{page}</p>
 
-      </div>
+
+
+
+
+{data.length>0 && (<div className="flex gap-2 items-center justify-center mt-6">
+  <button
+    onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+    disabled={page === 1}
+    className="px-3 py-1 bg-black text-white rounded disabled:opacity-50"
+  >
+    Prev
+  </button>
+
+  {getPaginationPages(page, totalPages).map((p, index) =>
+    p === '...' ? (
+      <span key={index} className="px-2">...</span>
+    ) : (
+      <button
+        key={p}
+        onClick={() => setPage(p)}
+        className={`px-3 py-1 rounded ${
+          p === page ? 'bg-black text-white' : 'bg-gray-200 text-black'
+        }`}
+      >
+        {p}
+      </button>
     )
-  })
-}
-<ChevronRight size={25} className='bg-black px-2 py-1 rounded-md'/>
-  
-</div>
+  )}
 
-</div>)}
+  <button
+    onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+    disabled={page === totalPages}
+    className="px-3 py-1 bg-black text-white rounded disabled:opacity-50"
+  >
+    Next
+  </button>
+</div>
+)}
+
+ 
+
+
+
+
+
+
+
 
          
         </div>

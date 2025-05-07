@@ -18,7 +18,7 @@ import Image from 'next/image'
 
 const navItems = [
     { name: "Find Jobs", link: "/search" },
-    { name: "Enhance CV", link: "/enhance-cv" },
+    { name: "Enhance CV", link: "/enhance-your-cv" },
     { name: "Interview Tips", link: "/interview-tips" },
     { name: "Salary Guide", link: "/salary-guide" },
     { name: "Articles", link: "/articles-2" },

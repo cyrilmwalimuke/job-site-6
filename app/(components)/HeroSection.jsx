@@ -30,8 +30,8 @@ const router = useRouter()
           Find Your <span className="text-primary">Dream Job</span> Today
         </h1>
         <p className="mb-8 text-lg text-muted-foreground md:text-xl">
-          {/* Discover thousands of job opportunities with all the information you need. Your next career move starts
-          here. */}
+          Discover thousands of job opportunities with all the information you need. Your next career move starts
+          here.
         </p>
 
         <div className="mx-auto mb-8 max-w-3xl rounded-xl bg-card p-4 shadow-lg md:p-6 bg-white">
