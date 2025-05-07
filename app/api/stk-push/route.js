@@ -4,7 +4,7 @@ const shortcode = 174379; // e.g. 174379 for sandbox
 const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
 const consumerKey = "eRFLuwLACviRoaB0lp4YSqtxzoQy0QzM1zAEYAfYLlJrmD5e";
 const consumerSecret ="VGG6SG6SK3QhKKyvpNC0p60VTVTAden9NiN7jWKsqZyclptmhOmL1ZHYTixe8zrg";
-const callbackURL = 'https://job-site-2.onrender.com/api/mpesa-callback'; // Your callback URL
+const callbackURL = 'https://job-site-3.onrender.com/api/mpesa-callback'; // Your callback URL
 
 const base64Credentials = Buffer.from(`${consumerKey}:${consumerSecret}`).toString('base64');
 
