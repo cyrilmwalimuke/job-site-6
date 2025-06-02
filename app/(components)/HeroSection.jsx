@@ -16,7 +16,7 @@ const router = useRouter()
     const [loading,setLoading] = React.useState(true)
     const [popularSearchTerms,setPopularSearchTerms] = React.useState([]);
   const searchParams = useSearchParams();
-    const handleSearchSubmit = (e) => {
+    const handleSearchSubmit = async (e) => {
         e.preventDefault();
       
         const params = new URLSearchParams({
@@ -33,6 +33,16 @@ const router = useRouter()
         });
       
         router.push(`/search?${params.toString()}`);
+
+        if (!searchTerm.trim()) return;
+
+    await fetch('/api/search-term', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ term: searchTerm,link:`/search?page=1&type=&limit=6&salaryRange=&searchTerm=${searchTerm}&experienceLevel=&sort=createdAt&order=desc&jobLocation=&industry=` }),
+    });
+
+    console.log(`Searching for: ${searchTerm}`);
       };
       
   

@@ -48,7 +48,7 @@ export default function Header() {
     // const navigate = useNavigate()
  
 
-    const handleSearchSubmit = (e) => {
+    const handleSearchSubmit = async (e) => {
       e.preventDefault();
     
       const params = new URLSearchParams({
@@ -65,6 +65,16 @@ export default function Header() {
       });
     
       router.push(`/search?${params.toString()}`);
+
+      if (!searchTerm.trim()) return;
+
+    await fetch('/api/search-term', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ term: searchTerm,link:`/search?page=1&type=&limit=6&salaryRange=&searchTerm=${searchTerm}&experienceLevel=&sort=createdAt&order=desc&jobLocation=&industry=` }),
+    });
+
+    console.log(`Searching for: ${searchTerm}`);
     };
     
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Search, Calendar, User, Clock, ArrowRight, TrendingUp, BookOpen, Filter } from "lucide-react"
+import { articles } from "@/lib/joba-sample-2"
 
 
 export default function ArticlesBlogPage() {
@@ -33,104 +34,104 @@ export default function ArticlesBlogPage() {
     featured: true,
   }
 
-  const articles = [
-    {
-      id: 2,
-      title: "How to Negotiate Your Salary: A Kenyan Professional's Guide",
-      excerpt:
-        "Learn the art of salary negotiation with proven tactics that have helped professionals increase their earnings by 30-50% in the Kenyan job market.",
-      author: "Grace Wanjiku",
-      authorRole: "HR Director",
-      date: "December 12, 2024",
-      readTime: "8 min read",
-      category: "Salary Guides",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 3,
-      title: "Top 10 Interview Questions for Banking Jobs in Kenya",
-      excerpt:
-        "Prepare for your next banking interview with these commonly asked questions and expert-approved answers from hiring managers at major Kenyan banks.",
-      author: "James Kiprotich",
-      authorRole: "Banking Executive",
-      date: "December 10, 2024",
-      readTime: "6 min read",
-      category: "Interview Prep",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 4,
-      title: "Remote Work Opportunities: The Future of Employment in Kenya",
-      excerpt:
-        "Explore the growing remote work landscape in Kenya and discover companies offering flexible work arrangements and international remote positions.",
-      author: "Sarah Akinyi",
-      authorRole: "Remote Work Consultant",
-      date: "December 8, 2024",
-      readTime: "10 min read",
-      category: "Remote Work",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 5,
-      title: "ATS-Friendly Resume Templates That Actually Work",
-      excerpt:
-        "Download our proven resume templates that pass Applicant Tracking Systems and get you noticed by hiring managers in Kenya's competitive job market.",
-      author: "Peter Otieno",
-      authorRole: "Career Coach",
-      date: "December 5, 2024",
-      readTime: "5 min read",
-      category: "Resume Writing",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 6,
-      title: "Kenya's Highest Paying Industries in 2024",
-      excerpt:
-        "Comprehensive salary analysis across different industries in Kenya, including tech, finance, healthcare, and emerging sectors with growth potential.",
-      author: "Mary Njeri",
-      authorRole: "Market Research Analyst",
-      date: "December 3, 2024",
-      readTime: "15 min read",
-      category: "Industry Insights",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 7,
-      title: "Building Your Professional Network in Nairobi",
-      excerpt:
-        "Strategic networking tips for professionals in Nairobi, including the best events, online communities, and relationship-building techniques.",
-      author: "Michael Ochieng",
-      authorRole: "Business Development Manager",
-      date: "November 30, 2024",
-      readTime: "7 min read",
-      category: "Professional Development",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 8,
-      title: "From Graduate to Professional: Your First Job Success Guide",
-      excerpt:
-        "Essential advice for recent graduates entering the Kenyan job market, from application strategies to workplace etiquette and career planning.",
-      author: "Linda Wambui",
-      authorRole: "Graduate Program Manager",
-      date: "November 28, 2024",
-      readTime: "9 min read",
-      category: "Career Tips",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-    {
-      id: 9,
-      title: "The Rise of Fintech Jobs in Kenya: Skills and Opportunities",
-      excerpt:
-        "Explore the booming fintech sector in Kenya, required skills, top companies hiring, and how to position yourself for success in this growing industry.",
-      author: "Robert Kamau",
-      authorRole: "Fintech Industry Expert",
-      date: "November 25, 2024",
-      readTime: "11 min read",
-      category: "Industry Insights",
-      image: "/placeholder.svg?height=250&width=400",
-    },
-  ]
+  // const articles = [
+  //   {
+  //     id: 2,
+  //     title: "How to Negotiate Your Salary: A Kenyan Professional's Guide",
+  //     excerpt:
+  //       "Learn the art of salary negotiation with proven tactics that have helped professionals increase their earnings by 30-50% in the Kenyan job market.",
+  //     author: "Grace Wanjiku",
+  //     authorRole: "HR Director",
+  //     date: "December 12, 2024",
+  //     readTime: "8 min read",
+  //     category: "Salary Guides",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Top 10 Interview Questions for Banking Jobs in Kenya",
+  //     excerpt:
+  //       "Prepare for your next banking interview with these commonly asked questions and expert-approved answers from hiring managers at major Kenyan banks.",
+  //     author: "James Kiprotich",
+  //     authorRole: "Banking Executive",
+  //     date: "December 10, 2024",
+  //     readTime: "6 min read",
+  //     category: "Interview Prep",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Remote Work Opportunities: The Future of Employment in Kenya",
+  //     excerpt:
+  //       "Explore the growing remote work landscape in Kenya and discover companies offering flexible work arrangements and international remote positions.",
+  //     author: "Sarah Akinyi",
+  //     authorRole: "Remote Work Consultant",
+  //     date: "December 8, 2024",
+  //     readTime: "10 min read",
+  //     category: "Remote Work",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "ATS-Friendly Resume Templates That Actually Work",
+  //     excerpt:
+  //       "Download our proven resume templates that pass Applicant Tracking Systems and get you noticed by hiring managers in Kenya's competitive job market.",
+  //     author: "Peter Otieno",
+  //     authorRole: "Career Coach",
+  //     date: "December 5, 2024",
+  //     readTime: "5 min read",
+  //     category: "Resume Writing",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Kenya's Highest Paying Industries in 2024",
+  //     excerpt:
+  //       "Comprehensive salary analysis across different industries in Kenya, including tech, finance, healthcare, and emerging sectors with growth potential.",
+  //     author: "Mary Njeri",
+  //     authorRole: "Market Research Analyst",
+  //     date: "December 3, 2024",
+  //     readTime: "15 min read",
+  //     category: "Industry Insights",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 7,
+  //     title: "Building Your Professional Network in Nairobi",
+  //     excerpt:
+  //       "Strategic networking tips for professionals in Nairobi, including the best events, online communities, and relationship-building techniques.",
+  //     author: "Michael Ochieng",
+  //     authorRole: "Business Development Manager",
+  //     date: "November 30, 2024",
+  //     readTime: "7 min read",
+  //     category: "Professional Development",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 8,
+  //     title: "From Graduate to Professional: Your First Job Success Guide",
+  //     excerpt:
+  //       "Essential advice for recent graduates entering the Kenyan job market, from application strategies to workplace etiquette and career planning.",
+  //     author: "Linda Wambui",
+  //     authorRole: "Graduate Program Manager",
+  //     date: "November 28, 2024",
+  //     readTime: "9 min read",
+  //     category: "Career Tips",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  //   {
+  //     id: 9,
+  //     title: "The Rise of Fintech Jobs in Kenya: Skills and Opportunities",
+  //     excerpt:
+  //       "Explore the booming fintech sector in Kenya, required skills, top companies hiring, and how to position yourself for success in this growing industry.",
+  //     author: "Robert Kamau",
+  //     authorRole: "Fintech Industry Expert",
+  //     date: "November 25, 2024",
+  //     readTime: "11 min read",
+  //     category: "Industry Insights",
+  //     image: "/placeholder.svg?height=250&width=400",
+  //   },
+  // ]
 
   const popularArticles = [
     { title: "How to Write a Cover Letter That Gets Results", readTime: "6 min read" },
@@ -168,7 +169,7 @@ export default function ArticlesBlogPage() {
                   className="pl-10 bg-white text-gray-900"
                 />
               </div>
-              <button className="bg-white text-blue-600 hover:bg-gray-100 flex gap-2 items-center p-3 rounded-md">
+              <button className="bg-white text-blue-600 hover:bg-gray-100 flex gap-1 items-center p-3 rounded-md">
                 <Search className="h-4 w-4 mr-2" />
                 Search
               </button>
@@ -192,7 +193,7 @@ export default function ArticlesBlogPage() {
                   />
                 </div>
                 <div className="md:w-1/2 p-8">
-                  <div className="mb-4 bg-blue-100 text-xs w-18 p-1 rounded-lg text-blue-800">{featuredArticle.category}</div>
+                  <div className="mb-4 bg-blue-100 text-xs w-21 py-1 px-2 rounded-full text-blue-800">{featuredArticle.category}</div>
                   <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">{featuredArticle.title}</h2>
                   <p className="text-gray-600 mb-6">{featuredArticle.excerpt}</p>
                   <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
@@ -230,7 +231,7 @@ export default function ArticlesBlogPage() {
                     variant={selectedCategory === category ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedCategory(category)}
-                    className={selectedCategory === category ? "bg-blue-600 hover:bg-blue-700" : ""}
+                    className={selectedCategory === category ? "bg-blue-600 hover:bg-blue-700 border-gray-500 rounded-md px-3 py-2 border-[1.2px] text-sm font-semibold" : "bg-white border-gray-500 rounded-md px-3 py-2 border-[1.2px] text-sm font-semibold"}
                   >
                     {category}
                   </button>
@@ -241,7 +242,7 @@ export default function ArticlesBlogPage() {
             {/* Articles Grid */}
             <div className="grid md:grid-cols-2 gap-8">
               {filteredArticles.map((article) => (
-                <div key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg">
                   <div className="aspect-video overflow-hidden">
                     <img
                       src={article.image || "/placeholder.svg"}
@@ -249,8 +250,8 @@ export default function ArticlesBlogPage() {
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="mb-3 bg-gray-100 text-gray-800">{article.category}</div>
+                  <div className="p-6 bg-white">
+                    <div className="mb-3 bg-gray-100 text-gray-800 w-fit px-4 rounded-full text-xs">{article.category}</div>
                     <h3 className="text-xl font-bold mb-3 leading-tight hover:text-blue-600 cursor-pointer">
                       {article.title}
                     </h3>
@@ -266,8 +267,8 @@ export default function ArticlesBlogPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="px-6 pb-6">
-                    <button variant="outline" className="w-full">
+                  <div className="px-6 pb-6 bg-white">
+                    <button variant="outline" className="w-full border-gray-300 py-3 border-[1.2px] flex items-center justify-center rounded-md">
                       Read More
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </button>
@@ -277,8 +278,8 @@ export default function ArticlesBlogPage() {
             </div>
 
             {/* Load More button */}
-            <div className="text-center mt-12">
-              <button size="lg" variant="outline">
+            <div className="text-center mt-12 flex justify-center">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md flex items-center justify-center gap-2">
                 Load More Articles
               </button>
             </div>
