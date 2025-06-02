@@ -1,22 +1,65 @@
 'use client'
 import { ArrowRight, Briefcase, Building2, MapPin } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const companies = ['/britam.png','/equity.png','/kenya power.png','/kra.png','/safaricom.png','/standard chattered.png']
 
 
+
+
 export default function HeroSection() {
 const router = useRouter()
-  const [query,setQuery] = React.useState("")
+ 
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const [loading,setLoading] = React.useState(true)
+    const [popularSearchTerms,setPopularSearchTerms] = React.useState([]);
+  const searchParams = useSearchParams();
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+      
+        const params = new URLSearchParams({
+          page: '1',
+          type: '',
+          limit: '6',
+          salaryRange: '',
+          searchTerm,
+          experienceLevel: '', // Must be a string
+          sort: 'createdAt',
+          order: 'desc',
+          jobLocation: '',
+          industry: '',
+        });
+      
+        router.push(`/search?${params.toString()}`);
+      };
+      
+  
+       useEffect(() => {
+          const param = searchParams.get('searchTerm')
+          if (param !== null && param !== searchTerm) {
+            setSearchTerm(param)
+          }
+        }, [searchParams])
+
+        useEffect(() => {
+                setLoading(true)
+                const fetchData = async () => {
+                  const res = await fetch('/api/get-search-terms')
+                  const data = await res.json()
+                  setPopularSearchTerms(data)
+                  setLoading(false)
+                }
+            
+                fetchData()
+              }, [])
+            
 
 
-  const handleSearch = () => {
-    if(query.trim()){
-      router.push(`/search?query=${query}`)
-    }
-  }
+
+
+
 
 
   
@@ -38,14 +81,14 @@ const router = useRouter()
           <div className="grid gap-4 md:grid-cols-[1fr_1fr_auto]">
             <div className="relative border-gray-500 border-[1.2px] rounded-md py-2">
               <Briefcase className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input placeholder="Job title, keywords, or company" className="pl-10 p-1 focus:outline-none"  value={query}
-        onChange={(e) => setQuery(e.target.value)}/>
+              <input placeholder="Job title, keywords, or ..." className="pl-10 p-1 focus:outline-none"  value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}/>
             </div>
             {/* <div className="relative border-gray-500 border-[1.2px] rounded-md py-2">
               <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input placeholder="City, state, or remote" className="pl-10 focus:outline-none" />
             </div> */}
-            <button onClick={handleSearch} className="bg-black p-3 rounded-md text-white">
+            <button onClick={handleSearchSubmit} className="bg-black p-3 rounded-md text-white">
               Search Jobs
             </button>
           </div>
@@ -53,21 +96,15 @@ const router = useRouter()
 
         <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
           <span>Popular searches:</span>
-          <Link href="/jobs/remote" className="rounded-full px-3 py-1 bg-gray-100 text-gray-500 hover:text-black">
-            Remote
-          </Link>
-          <Link href="/jobs/tech" className="rounded-full bg-muted px-3 py-1 hover:text-primary  bg-gray-100 text-gray-500 hover:text-black">
-            Software Engineer
-          </Link>
-          <Link href="/jobs/marketing" className="rounded-full bg-muted px-3 py-1  bg-gray-100 text-gray-500 hover:text-black hover:text-primary">
-            Marketing
-          </Link>
-          <Link href="/jobs/design" className="rounded-full  bg-gray-100 text-gray-500 hover:text-black bg-muted px-3 py-1 hover:text-primary">
-            UX Designer
-          </Link>
-          <Link href="/jobs/part-time" className="rounded-full  bg-gray-100 text-gray-500 hover:text-black bg-muted px-3 py-1 hover:text-primary">
-            Part-time
-          </Link>
+
+
+          {
+            popularSearchTerms.map((item)=>{
+              return (<Link key={item.term} href={item.link} className="rounded-full px-3 py-1 bg-gray-100 text-gray-500 hover:text-black">
+                {item.term}
+              </Link>)
+            })
+          }
         </div>
       </div>
 

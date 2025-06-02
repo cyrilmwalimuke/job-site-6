@@ -15,7 +15,7 @@ export default function page() {
     const [uploadFile,setUploadFile] = React.useState(null)
     console.log(uploadFile)
     const router = useRouter()
-    const serviceFee = 500.00
+    const serviceFee = 1000.00
 
     console.log(file)
 

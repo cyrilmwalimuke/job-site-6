@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
+import Link from 'next/link'; 
 
 
 import React from 'react';
@@ -9,6 +10,14 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 import HeroSection from './(components)/HeroSection';
 import Main from './(components)/Main';
+import EnhaceCv from './(components)/enhaceCv';
+import { CheckCircle, Clock, Target, TrendingUp } from 'lucide-react';
+import { FaArrowRight } from 'react-icons/fa';
+import NewsletterSubscription from './(components)/Newsletter';
+import TestimonialsSection from './(components)/Testimonials';
+import CareerResources from './(components)/CareerResources';
+import MobileAppPromo from './(components)/MobileAppPromo';
+import PricingCTA from './(components)/PostJob';
 
 export default function Home() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -29,7 +38,15 @@ export default function Home() {
         >
           <HeroSection />
           <Main />
+          {/* <EnhaceCv /> */}
+          <NewsletterSubscription />
+          <TestimonialsSection />
+          <CareerResources />
+          <MobileAppPromo />
+          <PricingCTA/>
         </div>
+
+   
      
     </>
   );

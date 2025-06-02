@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 const shortcode = 174379; // e.g. 174379 for sandbox
 const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-const consumerKey = "eRFLuwLACviRoaB0lp4YSqtxzoQy0QzM1zAEYAfYLlJrmD5e";
-const consumerSecret ="VGG6SG6SK3QhKKyvpNC0p60VTVTAden9NiN7jWKsqZyclptmhOmL1ZHYTixe8zrg";
+const consumerKey = "8KHeclxGLLMs182p6FVG5OUj9jHTx5fTRJmDOPAs2gBL4WDZ";
+const consumerSecret ="fjGSMfezDKeMAlTEBqRVHjXS5HcNIRTYuR2MCc2nPpSDM4NgxsvW9zHLSqsu1Xjs";
 
 
 const base64Credentials = Buffer.from(`${consumerKey}:${consumerSecret}`).toString('base64');
@@ -44,12 +44,12 @@ export async function POST(req) {
         BusinessShortCode: shortcode,
         Password: password,
         Timestamp: timestamp,
-        TransactionType: 'CustomerPayBillOnline',
+        TransactionType: 'CustomerBuyGoodsOnline',
         Amount: amount,
         PartyA: phone,
         PartyB: shortcode,
         PhoneNumber: phone,
-        CallBackURL: "https://job-site-5.onrender.com/api/mpesa/callback",
+        CallBackURL: 'https://794d-102-222-145-127.ngrok-free.app/api/cashpesa/callback',
         AccountReference: 'Ajira Connect',
         TransactionDesc: 'Job premium subscription',
       }),

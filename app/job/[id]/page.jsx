@@ -217,7 +217,13 @@ export default function Job({params}) {
             founded="2010"
           /> */}
 
-          {/* Similar Jobs */}
+          <div className='flex flex-col gap-5'>
+
+            <div className='h-100 w-full bg-gray-50 rounded-md flex items-center justify-center'>
+              <p className='text-gray-600 text-2xl'>AD AREA</p>
+
+            </div>
+
           <div className="bg-white rounded-xl shadow-sm p-6 border">
             <h3 className="text-lg font-semibold mb-4">Similar Jobs</h3>
             <div className="space-y-4">
@@ -246,6 +252,13 @@ export default function Job({params}) {
               ))}
             </div>
           </div>
+
+          </div>
+
+
+
+
+          
         </div>
       </div>
     </main>

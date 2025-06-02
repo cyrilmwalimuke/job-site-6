@@ -6,7 +6,7 @@ import { CiFilter, CiLocationOn } from 'react-icons/ci'
 import { FiBriefcase } from 'react-icons/fi'
 import { IoMdTime } from 'react-icons/io'
 import { FaRegTrashAlt } from "react-icons/fa";
-import { ExternalLinkIcon } from 'lucide-react'
+import { BriefcaseIcon, ExternalLinkIcon, RefreshCw, SearchIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
 
@@ -33,9 +33,10 @@ function Saved() {
       
   return (
    <main className='pt-10 pb-5 px-7'>
-    <div className='flex justify-between'>
+    {jobs.length>0?(<div>
+        <div className='flex justify-between'>
     <h1 className='font-bold text-2xl sm:text-4xl'>Saved Jobs</h1>
-    <p className='text-gray-500'>5 jobs saved</p>
+    <p className='text-gray-500'>{jobs?.length} jobs saved</p>
 
     </div>
 
@@ -109,7 +110,7 @@ function Saved() {
                         </div>
 
                         <div className='flex gap-5 text-xs mt-5 sm:mt-auto'>
-                            <Link href='/' className='flex items-center border-[1.2px] border-gray-500 rounded-lg py-1 px-2 gap-2 whitespace-nowrap'>
+                            <Link href={`/job/${job.Id}`}  className='flex items-center border-[1.2px] border-gray-500 rounded-lg py-1 px-2 gap-2 whitespace-nowrap'>
                             <ExternalLinkIcon className='text-gray-500' size={20}/>
                             View Job
                             </Link>
@@ -129,6 +130,32 @@ function Saved() {
             ))
         }
     </div>
+
+    </div>):(<div className='h-screen'>
+        <h1 className='font-bold text-2xl sm:text-4xl'>Saved Jobs</h1>
+        <div className="flex flex-col items-center justify-center text-center py-20 px-4 text-gray-600">
+      <BriefcaseIcon className="w-16 h-16 mb-4 text-blue-500" />
+      <h2 className="text-2xl font-semibold mb-2">No Saved Jobs</h2>
+      <p className="text-base mb-6 max-w-md">
+      You haven’t saved any jobs. Start exploring and save jobs you’re interested in to view them here later.
+      </p>
+      <div className="flex gap-4">
+       
+        <button
+          className="inline-flex items-center gap-2 px-5 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition"
+          onClick={() => window.location.href = '/'}
+        >
+          <SearchIcon className="w-4 h-4" />
+          Go to Home
+        </button>
+      </div>
+    </div>
+
+
+
+    </div>)}
+
+   
     
 
 

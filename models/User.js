@@ -19,7 +19,8 @@ const wishSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
-  isAdmin: { type: Boolean, default: false },
+  isAdmin: { type: Boolean, default: true },
+  timesSubscribes: { type: Number, default: 0 },
   wishItems: { type: [wishSchema], default: [] }
 }, { timestamps: true })
 

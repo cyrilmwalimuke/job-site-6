@@ -14,7 +14,7 @@ export default function Footer({sideBar,setSideBar}) {
                 <div>
                   <h3 className="mb-4 text-lg font-semibold">FleekJobs</h3>
                   <p className="text-sm text-muted-foreground">
-                    Connecting talented professionals with amazing companies since 2023.
+                    Connecting talented professionals with amazing companies since 2018.
                   </p>
                 </div>
                 <div>
@@ -26,7 +26,7 @@ export default function Footer({sideBar,setSideBar}) {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/enhance-cv" className="text-muted-foreground hover:text-foreground">
+                      <Link href="/enhance-your-cv" className="text-muted-foreground hover:text-foreground">
                         Enhance CV
                       </Link>
                     </li>
@@ -47,19 +47,10 @@ export default function Footer({sideBar,setSideBar}) {
                   <ul className="space-y-2 text-sm">
                     <li>
                       <Link href="/post-job" className="text-muted-foreground hover:text-foreground">
-                        Post Link Job
+                        Post Job
                       </Link>
                     </li>
-                    <li>
-                      <Link href="/pricing" className="text-muted-foreground hover:text-foreground">
-                        Pricing
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/resources/employers" className="text-muted-foreground hover:text-foreground">
-                        Employer Resources
-                      </Link>
-                    </li>
+                   
                   </ul>
                 </div>
                 <div>
@@ -78,6 +69,11 @@ export default function Footer({sideBar,setSideBar}) {
                     <li>
                       <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
                         Privacy Policy
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/faq" className="text-muted-foreground hover:text-foreground">
+                        FAQ
                       </Link>
                     </li>
                     <li>

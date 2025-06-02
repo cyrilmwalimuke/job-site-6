@@ -14,6 +14,7 @@ export default function Main() {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(true)
       useEffect(() => {
+        setLoading(true)
         const fetchData = async () => {
           const res = await fetch('/api/find-jobs')
           const data = await res.json()
@@ -24,7 +25,15 @@ export default function Main() {
         fetchData()
       }, [])
     
-      if (loading) return <p>Loading...</p>
+      if (loading) return (<div className="flex flex-col gap-5 items-center justify-center h-screen">
+        <span className="loader"></span>
+        <div>"Finding the best jobs for you…</div>
+
+      </div>
+        
+      )
+      
+      
   return (
     <main className="container mx-auto px-4 py-12">
       
@@ -37,7 +46,7 @@ export default function Main() {
      
       {
         jobs.slice(0,6).map((job) => (
-          <JobCardSearch key={job._Id} job={job} />
+          <JobCardSearch key={job._id} job={job} />
         ))
       }
     </div>
@@ -69,55 +78,7 @@ export default function Main() {
 
 
 
-    <div className="mt-16 grid gap-8 md:grid-cols-3">
-        <div className="rounded-xl bg-card p-6 shadow-lg transition-all hover:shadow-md bg-white">
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary ">
-            <IoSearch className="h-6 w-6" />
-          </div>
-          <h3 className="mb-2 text-xl font-bold">For Job Seekers</h3>
-          <p className="mb-4 text-muted-foreground">
-            Browse thousands of jobs across different industries and find the perfect match for your skills and
-            experience.
-          </p>
-         
-            <Link href='/search' className='flex items-center gap-2 text-blue-300'>
-              Browse Jobs 
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-         
-        </div>
-
-        <div className="rounded-xl bg-card p-6 shadow-sm transition-all hover:shadow-md bg-white">
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <Building2 className="h-6 w-6" />
-          </div>
-          <h3 className="mb-2 text-xl font-bold">For Employers</h3>
-          <p className="mb-4 text-muted-foreground">
-            Post jobs, find qualified candidates, and build your employer brand with our comprehensive hiring
-            solutions.
-          </p>
-    
-            <Link href="/post-job" className='flex gap-2 items-center text-blue-300' >
-              Post a Job <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-         
-        </div>
-
-        <div className="rounded-xl bg-card p-6 shadow-sm transition-all hover:shadow-md bg-white">
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <GrResources className="h-6 w-6" />
-          </div>
-          <h3 className="mb-2 text-xl font-bold">Career Resources</h3>
-          <p className="mb-4 text-muted-foreground">
-            Access expert advice, resume tips, interview guides, and career development resources href help you succeed.
-          </p>
-          
-            <Link href="/articles" className='flex gap-2 items-center text-blue-300'>
-              Explore Resources <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          
-        </div>
-      </div>
+   
   </main>
   )
 }

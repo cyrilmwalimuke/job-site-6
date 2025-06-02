@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiBookmark, CiMenuBurger, CiSearch } from 'react-icons/ci'
 import { FiUser } from 'react-icons/fi'
 import { IoChevronDown } from 'react-icons/io5'
@@ -18,10 +18,12 @@ import Image from 'next/image'
 
 const navItems = [
     { name: "Find Jobs", link: "/search" },
-    { name: "Enhance CV", link: "/enhance-your-cv" },
+    // { name: "Enhance CV", link: "/enhance-your-cv" },
     { name: "Interview Tips", link: "/interview-tips" },
     { name: "Salary Guide", link: "/salary-guide" },
-    { name: "Articles", link: "/articles-2" },
+   
+    { name: "Career Guide", link: "/career-guide" },
+
 
   ];
 
@@ -37,23 +39,41 @@ export default function Header() {
     const { isLoaded, isSignedIn, user } = useUser();
     const [hoveredItem, setHoveredItem] = useState(null);
     const [sideBar, setSideBar] = useState(false);
-    const [query, setQuery] = React.useState("");
+    const [searchTerm, setSearchTerm] = React.useState("");
     const router = useRouter()
     let queryParams  = useQuery().get("query")
+    const searchParams = useSearchParams();
     
 
     // const navigate = useNavigate()
  
 
     const handleSearchSubmit = (e) => {
-        console.log("hello world")
-        e.preventDefault();
-        if (query.trim()) {
+      e.preventDefault();
+    
+      const params = new URLSearchParams({
+        page: '1',
+        type: '',
+        limit: '6',
+        salaryRange: '',
+        searchTerm,
+        experienceLevel: '', // Must be a string
+        sort: 'createdAt',
+        order: 'desc',
+        jobLocation: '',
+        industry: '',
+      });
+    
+      router.push(`/search?${params.toString()}`);
+    };
+    
 
-          router.push(`/search?query=${encodeURIComponent(query)}`);
+     useEffect(() => {
+        const param = searchParams.get('searchTerm')
+        if (param !== null && param !== searchTerm) {
+          setSearchTerm(param)
         }
-        
-      }
+      }, [searchParams])
   
   return (
     <>
@@ -91,10 +111,10 @@ export default function Header() {
     <div className='hidden sm:flex gap-5 items-center'>
 
     <form onSubmit = {handleSearchSubmit} className='rounded-full border-gray-500 border-[1.2px]  items-center p-2 flex gap-2'>
-            <button>
+            <button className='cursor-pointer'>
                 <CiSearch/>
             </button>
-            <input type="text" placeholder='Search Jobs...' className='focus:outline-none' value={query || queryParams || ""}  onChange={(e) => setQuery(e.target.value)} />
+            <input type="text" placeholder='Search Jobs...' className='focus:outline-none' value={searchTerm}  onChange={(e) => setSearchTerm(e.target.value)} />
 
         </form>
        {user?(<div className='flex items-center gap-2 font-semibold'>
@@ -116,7 +136,7 @@ export default function Header() {
      
         <Link href='/post-job' className='p-2 hover:bg-gray-100 rounded-2xl text-sm font-semibold flex gap-2 items-center'>
         <SlBriefcase />
-        <p>Post a Job</p>
+        <p className='flex items-center'>Post a Job 👑</p>
 
         </Link>
 
