@@ -1,24 +1,68 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Search, Calendar, User, Clock, ArrowRight, TrendingUp, BookOpen, Filter } from "lucide-react"
-import { articles } from "@/lib/joba-sample-2"
+import { useRouter } from "next/navigation";
+// import { articles } from "@/lib/joba-sample-2"
+
+
+function getPaginationPages(currentPage, totalPages) {
+  const pages = [];
+
+  if (totalPages <= 5) {
+    // show all pages
+    for (let i = 1; i <= totalPages; i++) pages.push(i);
+  } else {
+    // always show first, last, current, and surrounding pages
+    pages.push(1);
+
+    if (currentPage > 3) pages.push('...');
+
+    const startPage = Math.max(2, currentPage - 1);
+    const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = startPage; i <= endPage; i++) pages.push(i);
+
+    if (currentPage < totalPages - 2) pages.push('...');
+
+    pages.push(totalPages);
+  }
+
+  return pages;
+}
+
 
 
 export default function ArticlesBlogPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
+  const [articles,setArticles] = useState([]) 
+  const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1)
+  const [limit, setLimit] = useState(6)
+  const router = useRouter()
+  console.log(totalPages)
 
-  const categories = [
-    "All",
-    "Career Tips",
-    "Interview Prep",
-    "Resume Writing",
-    "Salary Guides",
-    "Industry Insights",
-    "Remote Work",
-    "Professional Development",
-  ]
+
+  
+
+
+
+
+        const categories = [
+          "All",
+          "Career Advice",
+          "Interview Prep",
+          "Resume Writing",
+          "Salary Guides",
+          "Industry Insights",
+          "Remote Work",
+          "Professional Development",
+          "Job Search",
+          "Networking"
+      
+        ]
 
   const featuredArticle = {
     id: 1,
@@ -34,104 +78,7 @@ export default function ArticlesBlogPage() {
     featured: true,
   }
 
-  // const articles = [
-  //   {
-  //     id: 2,
-  //     title: "How to Negotiate Your Salary: A Kenyan Professional's Guide",
-  //     excerpt:
-  //       "Learn the art of salary negotiation with proven tactics that have helped professionals increase their earnings by 30-50% in the Kenyan job market.",
-  //     author: "Grace Wanjiku",
-  //     authorRole: "HR Director",
-  //     date: "December 12, 2024",
-  //     readTime: "8 min read",
-  //     category: "Salary Guides",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Top 10 Interview Questions for Banking Jobs in Kenya",
-  //     excerpt:
-  //       "Prepare for your next banking interview with these commonly asked questions and expert-approved answers from hiring managers at major Kenyan banks.",
-  //     author: "James Kiprotich",
-  //     authorRole: "Banking Executive",
-  //     date: "December 10, 2024",
-  //     readTime: "6 min read",
-  //     category: "Interview Prep",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Remote Work Opportunities: The Future of Employment in Kenya",
-  //     excerpt:
-  //       "Explore the growing remote work landscape in Kenya and discover companies offering flexible work arrangements and international remote positions.",
-  //     author: "Sarah Akinyi",
-  //     authorRole: "Remote Work Consultant",
-  //     date: "December 8, 2024",
-  //     readTime: "10 min read",
-  //     category: "Remote Work",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "ATS-Friendly Resume Templates That Actually Work",
-  //     excerpt:
-  //       "Download our proven resume templates that pass Applicant Tracking Systems and get you noticed by hiring managers in Kenya's competitive job market.",
-  //     author: "Peter Otieno",
-  //     authorRole: "Career Coach",
-  //     date: "December 5, 2024",
-  //     readTime: "5 min read",
-  //     category: "Resume Writing",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "Kenya's Highest Paying Industries in 2024",
-  //     excerpt:
-  //       "Comprehensive salary analysis across different industries in Kenya, including tech, finance, healthcare, and emerging sectors with growth potential.",
-  //     author: "Mary Njeri",
-  //     authorRole: "Market Research Analyst",
-  //     date: "December 3, 2024",
-  //     readTime: "15 min read",
-  //     category: "Industry Insights",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 7,
-  //     title: "Building Your Professional Network in Nairobi",
-  //     excerpt:
-  //       "Strategic networking tips for professionals in Nairobi, including the best events, online communities, and relationship-building techniques.",
-  //     author: "Michael Ochieng",
-  //     authorRole: "Business Development Manager",
-  //     date: "November 30, 2024",
-  //     readTime: "7 min read",
-  //     category: "Professional Development",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 8,
-  //     title: "From Graduate to Professional: Your First Job Success Guide",
-  //     excerpt:
-  //       "Essential advice for recent graduates entering the Kenyan job market, from application strategies to workplace etiquette and career planning.",
-  //     author: "Linda Wambui",
-  //     authorRole: "Graduate Program Manager",
-  //     date: "November 28, 2024",
-  //     readTime: "9 min read",
-  //     category: "Career Tips",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  //   {
-  //     id: 9,
-  //     title: "The Rise of Fintech Jobs in Kenya: Skills and Opportunities",
-  //     excerpt:
-  //       "Explore the booming fintech sector in Kenya, required skills, top companies hiring, and how to position yourself for success in this growing industry.",
-  //     author: "Robert Kamau",
-  //     authorRole: "Fintech Industry Expert",
-  //     date: "November 25, 2024",
-  //     readTime: "11 min read",
-  //     category: "Industry Insights",
-  //     image: "/placeholder.svg?height=250&width=400",
-  //   },
-  // ]
+
 
   const popularArticles = [
     { title: "How to Write a Cover Letter That Gets Results", readTime: "6 min read" },
@@ -140,13 +87,51 @@ export default function ArticlesBlogPage() {
     { title: "Freelancing vs Full-time: Making the Right Choice", readTime: "10 min read" },
   ]
 
-  const filteredArticles = articles.filter((article) => {
+  const filteredArticles = articles?.filter((article) => {
     const matchesSearch =
       article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory
     return matchesSearch && matchesCategory
   })
+
+
+
+  useEffect(() => {
+      setLoading(true)
+      const fetchJobs = async () => {
+        try {
+    
+          const params = new URLSearchParams();
+  
+          params.set('page', page);
+          params.set('limit', limit);
+       
+        
+       
+          // router.push(`/career-guide?${params.toString()}`)
+  
+          const res = await fetch(`/api/get-home-blog-pages?${params.toString()}`)
+  
+          if (!res.ok) {
+            throw new Error('Failed to fetch listings')
+          }
+  
+          const datafromApi = await res.json()
+          console.log("datafromApi", datafromApi)
+          setArticles(datafromApi.blogsInDb)
+          setTotalPages(datafromApi.totalPages)
+          // setTotalPages(datafromApi.totalPages)
+          // setTotalDispalyPages(datafromApi.totalDIsplayPages)
+        } catch (error) {
+          console.error(error)
+        } finally {
+          setLoading(false)
+        }
+      }
+  
+      fetchJobs()
+    }, [page,limit])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -241,7 +226,7 @@ export default function ArticlesBlogPage() {
 
             {/* Articles Grid */}
             <div className="grid md:grid-cols-2 gap-8">
-              {filteredArticles.map((article) => (
+              {filteredArticles?.map((article) => (
                 <div key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg">
                   <div className="aspect-video overflow-hidden">
                     <img
@@ -279,9 +264,42 @@ export default function ArticlesBlogPage() {
 
             {/* Load More button */}
             <div className="text-center mt-12 flex justify-center">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md flex items-center justify-center gap-2">
-                Load More Articles
-              </button>
+            
+              
+   {articles?.length>0 && !loading && (<div className="flex gap-2 items-center justify-center mt-6">
+  <button
+    onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+    disabled={page === 1}
+    className="px-3 py-1 bg-black text-white rounded disabled:opacity-50"
+  >
+    Prev
+  </button>
+
+        {getPaginationPages(page, totalPages).map((p, index) =>
+          p === '...' ? (
+            <span key={index} className="px-2">...</span>
+          ) : (
+            <button
+              key={p}
+              onClick={() => setPage(p)}
+              className={`px-3 py-1 rounded ${
+                p === page ? 'bg-black text-white' : 'bg-gray-200 text-black'
+              }`}
+            >
+              {p}
+            </button>
+          )
+        )}
+
+  <button
+    onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+    disabled={page === totalPages}
+    className="px-3 py-1 bg-black text-white rounded disabled:opacity-50"
+  >
+    Next
+  </button>
+</div>
+)}
             </div>
           </div>
 

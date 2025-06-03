@@ -11,7 +11,7 @@ import { jobs } from '@/data/jobs2'
 
 
 
-export default function Job({params}) {
+export default  function Job({params}) {
   const { id } = useParams();
   const [jobData, setJobData] = useState({});
   const [loading, setLoading] = useState(true);

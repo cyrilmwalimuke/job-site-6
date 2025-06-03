@@ -9,27 +9,26 @@ import { useState } from "react"
 import { Upload, Save, Eye, X } from "lucide-react"
 import { IoIosClose } from "react-icons/io"
 
-import LexicalEditor from "../(components)/LexicalEditor"
-
 
 
 const categories = [
-  "Resume Tips",
-  "Interview Tips",
-  "Career Advice",
-  "Remote Work",
-  "Skills Development",
-  "Networking",
-  "Salary Guides",
-  "Industry Insights",
-  "Job Search",
-  "Professional Development",
-]
+    "All",
+    "Career Advice",
+    "Interview Prep",
+    "Resume Writing",
+    "Salary Guides",
+    "Industry Insights",
+    "Remote Work",
+    "Professional Development",
+    "Job Search",
+    "Networking"
+
+  ]
 
 export default function CreateBlogPage() {
  
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [imagePreview, setImagePreview] = useState("")
+
   const [file, setFile] = useState(null)
   const [preview,setPreview] = useState(false)
    const fileRef = useRef(null);
@@ -44,6 +43,7 @@ export default function CreateBlogPage() {
     excerpt: "",
     content: "",
     author: "",
+    slug: "",
    category: "",
     image: "",
     featured: false,
@@ -170,15 +170,27 @@ export default function CreateBlogPage() {
                 <div className="text-gray-500">Enter the basic details for your blog post</div>
               </div>
               <div className="space-y-4">
-               
 
-                <div className="space-y-2">
+              <div className="space-y-2">
                   <label htmlFor="title" className="font-semibold">Title *</label>
                   <input
                     id="title"
                     placeholder="Enter blog post title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
+                    required
+                     className="border-gray-500 border-[1.2px] rounded-md p-2 w-full"
+                  />
+                </div>
+               
+
+                <div className="space-y-2">
+                  <label htmlFor="title" className="font-semibold">Slug *</label>
+                  <input
+                    id="slug"
+                    placeholder="Enter blog post slug"
+                    value={formData.slug}
+                    onChange={(e) => handleInputChange("slug", e.target.value)}
                     required
                      className="border-gray-500 border-[1.2px] rounded-md p-2 w-full"
                   />
@@ -363,11 +375,7 @@ export default function CreateBlogPage() {
           </div>
         </div>
 
-        {/* <TiptapEditor
-        content={formData.content}
-        onChange={(value) => handleInputChange('content', value)}
-      /> */}
-      <LexicalEditor onChange={setContents} />
+      
 
       
       </form>
