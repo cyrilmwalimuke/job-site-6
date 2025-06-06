@@ -203,7 +203,7 @@ export default function FAQPage() {
           <HelpCircle className="h-16 w-16 mx-auto mb-6 text-orange-100" />
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
           <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-            Find answers to common questions about our job platform. Can&apos;t find what you&apos;re looking for? We're here to help!
+            Find answers to common questions about our job platform. Can&apos;t find what you&apos;re looking for? We are here to help!
           </p>
 
           <div className="relative max-w-md mx-auto">
