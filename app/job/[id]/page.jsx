@@ -7,6 +7,8 @@ import { ArrowLeft, Bookmark, Briefcase, Building2, Calendar, Clock, DollarSign,
 import { GoDotFill } from 'react-icons/go'
 import { useParams } from 'next/navigation'
 import { jobs } from '@/data/jobs2'
+import ShareButtons from '@/app/(components)/ShareButtons'
+
 
 
 
@@ -16,6 +18,7 @@ export default  function Job({params}) {
   const [jobData, setJobData] = useState({});
   const [loading, setLoading] = useState(true);
   console.log(jobData)
+  const title = jobData.title || "Job Details";
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -137,6 +140,11 @@ export default  function Job({params}) {
 
 
               </button>
+              <div className='flex items-center'>
+              <ShareButtons title={title} />
+
+              </div>
+             
             </div>
           </div>
 

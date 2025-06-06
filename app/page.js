@@ -42,8 +42,9 @@ export default function Home() {
           <NewsletterSubscription />
           <TestimonialsSection />
           <CareerResources />
-          <MobileAppPromo />
           <PricingCTA/>
+          <MobileAppPromo />
+          
         </div>
 
    
