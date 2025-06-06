@@ -87,10 +87,27 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 
+function useDeviceType() {
+  const [deviceType, setDeviceType] = useState("unknown");
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile =
+      /iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(userAgent);
+    setDeviceType(isMobile ? "mobile" : "desktop");
+  }, []);
+
+  return deviceType;
+}
+
 
 export default function ShareButtons({ title }) {
   const pathname = usePathname()
   const [shareUrl, setShareUrl] = useState('')
+  const device = useDeviceType();
+
+
+
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -122,7 +139,7 @@ export default function ShareButtons({ title }) {
       </a>
 
       <a
-        href={`https://web.whatsapp.com/send?text=${whatsappText}`}
+        href={`https://api.whatsapp.com/send?text=${whatsappText}`}
         target="_blank"
         rel="noopener noreferrer"
         className="text-green-500 hover:text-green-700"
@@ -137,6 +154,8 @@ export default function ShareButtons({ title }) {
       >
         <FaLinkedin size={24} />
       </a>
+      <div>You are using a {device} device.</div>
+      
     </div>
   )
 }

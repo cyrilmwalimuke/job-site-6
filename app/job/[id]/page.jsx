@@ -144,6 +144,7 @@ export default  function Job({params}) {
               <ShareButtons title={title} />
 
               </div>
+              
              
             </div>
           </div>
