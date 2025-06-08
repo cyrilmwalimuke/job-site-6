@@ -19,8 +19,8 @@ import Image from 'next/image'
 const navItems = [
     { name: "Find Jobs", link: "/search" },
     // { name: "Enhance CV", link: "/enhance-your-cv" },
-    { name: "Interview Tips", link: "/interview-tips" },
-    { name: "Salary Guide", link: "/salary-guide" },
+    { name: "Interview Tips", link: "/blog/2025-interview-tips-that-actually-work" },
+    { name: "Salary Guide", link: "/blog/salary-guide-2025-know-your-worth-before-you-negotiate"},
    
     { name: "Career Guide", link: "/career-guide" },
 

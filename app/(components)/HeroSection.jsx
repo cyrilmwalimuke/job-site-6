@@ -91,7 +91,7 @@ const router = useRouter()
           <div className="grid gap-4 md:grid-cols-[1fr_1fr_auto]">
             <div className="relative border-gray-500 border-[1.2px] rounded-md py-2">
               <Briefcase className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input placeholder="Job title, keywords, or ..." className="pl-10 p-1 focus:outline-none"  value={searchTerm}
+              <input placeholder="Job title, company name, or ..." className="pl-10 p-1 focus:outline-none"  value={searchTerm}
                onChange={(e) => setSearchTerm(e.target.value)}/>
             </div>
             {/* <div className="relative border-gray-500 border-[1.2px] rounded-md py-2">
