@@ -21,7 +21,7 @@ const jobFields = [
   const defaultLogo = "https://cdn-icons-png.flaticon.com/512/1230/1230247.png"
 
 
-export default function page() {
+export default function Page() {
     const [file, setFile] = useState(null);
     const fileRef = useRef(null);
     const [loading, setLoading] = useState(false);
