@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react"
 import { Search, Calendar, User, Clock, ArrowRight, TrendingUp, BookOpen, Filter } from "lucide-react"
 import { useRouter } from "next/navigation";
+import FeaturedArticle from "../(components)/FeaturedArticle";
+import RelatedPost from "../(components)/relatedPost";
+import Link from "next/link";
+
 // import { articles } from "@/lib/joba-sample-2"
 
 
@@ -42,7 +46,13 @@ export default function ArticlesBlogPage() {
   const [totalPages, setTotalPages] = useState(1)
   const [limit, setLimit] = useState(6)
   const router = useRouter()
+  const [popularArticles,setPopularArticles] = useState([])
+  const [email,setEmail] = useState('')
+ 
   console.log(totalPages)
+
+
+
 
 
   
@@ -64,28 +74,10 @@ export default function ArticlesBlogPage() {
       
         ]
 
-  const featuredArticle = {
-    id: 1,
-    title: "The Complete Guide to Landing Your Dream Job in Kenya's Tech Industry",
-    excerpt:
-      "Discover the insider secrets, essential skills, and proven strategies that successful tech professionals use to secure high-paying positions at top companies like Safaricom, Equity Bank, and international firms.",
-    author: "David Mwangi",
-    authorRole: "Senior Tech Recruiter",
-    date: "December 15, 2024",
-    readTime: "12 min read",
-    category: "Career Tips",
-    image: "https://media.istockphoto.com/id/626123058/photo/african-women-plucking-tea-leaves-on-plantation-kenya-east-africa.webp?a=1&b=1&s=612x612&w=0&k=20&c=T8REeU_8f7IwCfeK9QIBnliR-RALCwjymC-ZeUdPtzs=",
-    featured: true,
-  }
 
 
 
-  const popularArticles = [
-    { title: "How to Write a Cover Letter That Gets Results", readTime: "6 min read" },
-    { title: "LinkedIn Optimization for Kenyan Professionals", readTime: "8 min read" },
-    { title: "Common Interview Mistakes to Avoid", readTime: "5 min read" },
-    { title: "Freelancing vs Full-time: Making the Right Choice", readTime: "10 min read" },
-  ]
+  
 
   const filteredArticles = articles?.filter((article) => {
     const matchesSearch =
@@ -95,6 +87,15 @@ export default function ArticlesBlogPage() {
     return matchesSearch && matchesCategory
   })
 
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+    const res = await fetch('/api/career-newsletter',{
+        method:'POST',
+        headers: {'Content-Type':'application/json'},
+        body:JSON.stringify({email:email})
+    })
+  }
 
 
   useEffect(() => {
@@ -133,6 +134,17 @@ export default function ArticlesBlogPage() {
       fetchJobs()
     }, [page,limit])
 
+
+     useEffect(()=>{
+            const fetchFeatured  = async () =>{
+                const res = await fetch('/api/get-blogs')
+                const data  = await res.json()
+                setPopularArticles(data)
+            }
+            fetchFeatured()
+        
+          },[])
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -144,14 +156,14 @@ export default function ArticlesBlogPage() {
               Stay ahead in your career with expert insights, industry trends, and practical advice from Kenya's top
               professionals and recruiters.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <div className="relative flex-1 bg-white flex items-center rounded-md">
+            <div className="flex gap-4 max-w-md mx-auto">
+              <div className="relative flex-1 bg-white flex items-center rounded-md ">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   placeholder="Search articles..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-white text-gray-900"
+                  className="pl-10 bg-white text-gray-900 h-12 rounded-md"
                 />
               </div>
               <button className="bg-white text-blue-600 hover:bg-gray-100 flex gap-1 items-center p-3 rounded-md">
@@ -167,41 +179,9 @@ export default function ArticlesBlogPage() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-3 ">
-            {/* Featured Article */}
-            <div className="mb-12 overflow-hidden shadow-lg rounded-md">
-              <div className="md:flex">
-                <div className="md:w-1/2">
-                  <img
-                    src={featuredArticle.image || "/placeholder.svg"}
-                    alt={featuredArticle.title}
-                    className="w-full h-64 md:h-full object-cover"
-                  />
-                </div>
-                <div className="md:w-1/2 p-8">
-                  <div className="mb-4 bg-blue-100 text-xs w-21 py-1 px-2 rounded-full text-blue-800">{featuredArticle.category}</div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">{featuredArticle.title}</h2>
-                  <p className="text-gray-600 mb-6">{featuredArticle.excerpt}</p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-6">
-                    <div className="flex items-center gap-1">
-                      <User className="h-4 w-4" />
-                      <span>{featuredArticle.author}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{featuredArticle.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{featuredArticle.readTime}</span>
-                    </div>
-                  </div>
-                  <button className="bg-blue-600 hover:bg-blue-700 flex px-3 py-2 text-white rounded-lg items-center gap-2">
-                    Read Full Article
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </button>
-                </div>
-              </div>
-            </div>
+         
+
+            <FeaturedArticle/>
 
             {/* Category Filter */}
             <div className="mb-8">
@@ -227,7 +207,7 @@ export default function ArticlesBlogPage() {
             {/* Articles Grid */}
             <div className="grid md:grid-cols-2 gap-8">
               {filteredArticles?.map((article) => (
-                <div key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg">
+                <div key={article._id} className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg">
                   <div className="aspect-video overflow-hidden">
                     <img
                       src={article.image || "/placeholder.svg"}
@@ -253,10 +233,10 @@ export default function ArticlesBlogPage() {
                     </div>
                   </div>
                   <div className="px-6 pb-6 bg-white">
-                    <button variant="outline" className="w-full border-gray-300 py-3 border-[1.2px] flex items-center justify-center rounded-md">
+                    <Link href={`/blog/${article.slug}`} variant="outline" className="w-full border-gray-300 py-3 border-[1.2px] flex items-center justify-center rounded-md">
                       Read More
                       <ArrowRight className="h-4 w-4 ml-2" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -315,15 +295,10 @@ export default function ArticlesBlogPage() {
                   </div>
                   <div className="space-y-4">
                     {popularArticles.map((article, index) => (
-                      <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                        <h4 className="font-medium text-sm mb-2 hover:text-blue-600 cursor-pointer leading-tight">
-                          {article.title}
-                        </h4>
-                        <div className="flex items-center gap-1 text-xs text-gray-500">
-                          <Clock className="h-3 w-3" />
-                          <span>{article.readTime}</span>
-                        </div>
-                      </div>
+                  
+                    <RelatedPost key={index} article={article}/>
+
+
                     ))}
                   </div>
                 </div>
@@ -339,10 +314,10 @@ export default function ArticlesBlogPage() {
                   <p className="text-sm text-gray-600 mb-4">
                     Get the latest career insights and job market trends delivered to your inbox weekly.
                   </p>
-                  <div className="space-y-3">
-                    <input placeholder="Enter your email" className="focus:outline-none bg-white rounded-md px-3 p-1"/>
-                    <button className="w-55 rounded-md py-1 bg-blue-600 hover:bg-blue-700">Subscribe</button>
-                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <input placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)} className="focus:outline-none bg-white rounded-md px-3 p-1"/>
+                    <button className="w-full text-white rounded-md py-1 bg-blue-600 hover:bg-blue-700">Subscribe</button>
+                  </form>
                   <p className="text-xs text-gray-500 mt-2">No spam. Unsubscribe anytime.</p>
                 </div>
               </div>

@@ -1,13 +1,26 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useUser } from '@clerk/nextjs';
 
-import { ArrowLeft, Bookmark, Briefcase, Building2, Calendar, Clock, DollarSign, MapPin, Share2 } from "lucide-react"
+import { ArrowLeft, Bookmark,Briefcase ,Building2, Calendar, Clock, DollarSign, MapPin, Share2 } from "lucide-react"
 
 import { GoDotFill } from 'react-icons/go'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { jobs } from '@/data/jobs2'
 import ShareButtons from '@/app/(components)/ShareButtons'
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import SimilarJobs from '@/app/(components)/SimilarJobs';
+import JobLoadingSkeleton from '@/app/(components)/JobLoadingSkeleton';
+
+
+
+
+dayjs.extend(relativeTime);
+
+
+
 
 
 
@@ -19,6 +32,9 @@ export default  function Job({params}) {
   const [loading, setLoading] = useState(true);
   console.log(jobData)
   const title = jobData.title || "Job Details";
+  const { isSignedIn, user, isLoaded } = useUser();
+  console.log(isSignedIn,user,isLoaded)
+  const router  = useRouter()
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -38,8 +54,31 @@ export default  function Job({params}) {
 
 
   const addToWishList = async (thisProduct) => {
-    // const res = await fetch(`/api/save-to-wishlist/${email}`, {
-      const res = await fetch('/api/save-to-wishlist', {
+    if (user ===null){
+      alert("please login to save a job")
+      router.push('/login')
+      return
+    }
+
+    const res1 = await fetch(`/api/get-whish-item/${thisProduct.title}`)
+    const correctData = await res1.json()
+
+    console.log(correctData.exist)
+
+    if(correctData.exists === true) {
+      alert("product already in the wishList")
+      return
+    }
+
+    
+
+
+
+
+
+
+    
+      const res2 = await fetch('/api/save-to-wishlist', {
       method: 'POST',
       body: JSON.stringify(thisProduct),
       headers: {
@@ -51,18 +90,8 @@ export default  function Job({params}) {
    
   }
       
-        if (loading) return (
-          <div className='flex justify-center items-center h-screen'>
-            <div className="flex items-center justify-center h-32">
-  <div className="w-10 h-10 border-2  rounded-full animate-spin border-gray-500"></div>
-</div>
-          </div>
 
-
-        )
-  
-
-
+if (loading) return <JobLoadingSkeleton/>
    
   
   return (
@@ -113,37 +142,36 @@ export default  function Job({params}) {
                     <Clock className="h-4 w-4 mr-1" />
                     {jobData.type}
                   </div>
-                  {jobData.salary && (
+                  {/* {jobData.salary && (
                     <div className="flex items-center text-sm text-muted-foreground">
                       <DollarSign className="h-4 w-4 mr-1" />
                       {jobData.salary}
                     </div>
-                  )}
+                  )} */}
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Calendar className="h-4 w-4 mr-1" />
-                    Posted {jobData.posted_at}
+                    Posted {dayjs(jobData.updatedAt).fromNow()}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 mt-6 items-center">
+            <div className="flex flex-wrap gap-3 mt-6 items-center ">
               <button className="border-[1.2px] border-gray-500 rounded-md p-2 hover:bg-gray-50 flex justify-center items-center">
                 Apply Now
               </button>
               <button variant="outline" size="icon">
                 <Share2 className="h-6 w-6" />
-                <span className="sr-only">Share</span>
+              
               </button>
               <button onClick={()=>addToWishList(jobData)}>
               <Bookmark className="h-6 w-6" />
 
 
-              </button>
-              <div className='flex items-center'>
-              <ShareButtons title={title} />
 
-              </div>
+              </button>
+              <ShareButtons/>
+            
               
              
             </div>
@@ -171,7 +199,9 @@ export default  function Job({params}) {
                 })
               } */}
             
-            {jobData.responsibilities}
+            {/* {jobData.responsibilities} */}
+
+            <div className="prose  prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.responsibilities }} />
 
 
 
@@ -233,34 +263,10 @@ export default  function Job({params}) {
 
             </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border">
-            <h3 className="text-lg font-semibold mb-4">Similar Jobs</h3>
-            <div className="space-y-4">
-              {jobs.map((relatedJob) => (
-                <div key={relatedJob.Id} className="pb-4 last:pb-0 border-b last:border-0">
-                  <Link
-                    href={`/jobs/${relatedJob.Id}`}
-                    className="block hover:bg-muted/50 rounded-lg -mx-2 p-2 transition-colors"
-                  >
-                    <h4 className="font-medium">{relatedJob.title}</h4>
-                    <div className="text-sm text-muted-foreground mt-1">{relatedJob.employer_name}</div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2 text-xs text-muted-foreground">
-                      <div className="flex items-center">
-                        <MapPin className="h-3 w-3 mr-1" />
-                        {relatedJob.location}
-                      </div>
-                      {relatedJob.salary && (
-                        <div className="flex items-center">
-                          <DollarSign className="h-3 w-3 mr-1" />
-                          {relatedJob.salary}
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+
+            <SimilarJobs/>
+
+         
 
           </div>
 

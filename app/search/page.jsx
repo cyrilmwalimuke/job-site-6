@@ -275,10 +275,30 @@ const handleExperienceChange = (level) => {
           <div className='hidden sm:flex h-10 w-[1px] bg-gray-200'>
 
           </div>
-          <div className="relative hidden sm:flex items-center border  border-gray-500  rounded-md p-2 bg-white">
+          {/* <div className="relative hidden sm:flex items-center border  border-gray-500  rounded-md p-2 bg-white">
             <CiLocationOn className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
             <input placeholder="Job location" className="pl-10 focus:outline-none w-full" value={jobLocation} onChange={(e)=>setJobLocation(e.target.value)} />
-          </div>
+          </div> */}
+
+<div className="relative hidden sm:flex items-center border border-gray-500 rounded-md p-2 bg-white">
+  <CiLocationOn className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+  <select
+    value={jobLocation}
+    onChange={(e) => setJobLocation(e.target.value)}
+    className="pl-10 pr-4 focus:outline-none w-full bg-transparent appearance-none"
+  >
+    <option value="">Select county</option>
+    {[
+      "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado",
+      "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia",
+      "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang’a", "Nairobi",
+      "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita-Taveta", "Tana River",
+      "Tharaka-Nithi", "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"
+    ].map((county) => (
+      <option key={county} value={county}>{county}</option>
+    ))}
+  </select>
+</div>
           <button className='bg-black px-7 py-2 text-white rounded-md hidden sm:flex items-center gap-2' type='submit'>
             Search
 

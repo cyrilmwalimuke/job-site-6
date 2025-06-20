@@ -6,8 +6,8 @@ const wishSchema = new mongoose.Schema({
   location: { type: String, required: true },
   description: { type: String, required: true },
   salary: { type: Number, default: null },
-  type: { type: String }, // e.g., Full-time, Part-time
-  experience: { type: String }, // e.g., Entry, Mid, Senior
+  type: { type: String },
+  experience: { type: String },
   responsibilities: { type: String },
   education_qualification_experience_skills_traits: { type: String },
   fields: { type: [String], default: [] },
@@ -15,7 +15,11 @@ const wishSchema = new mongoose.Schema({
   applicationValue: { type: String },
   companyWebsite: { type: String },
   employer_logo: { type: String }
-}, { _id: false }, {timestamps:true}) // optional: disable _id for subdocs
+}, {
+  _id: true,
+  timestamps: true
+});
+
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },

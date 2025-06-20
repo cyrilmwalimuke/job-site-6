@@ -53,7 +53,7 @@ export default function CareerResources() {
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post, index) => (
-            <a key={index} href={post.link} className="bg-white rounded-2xl shadow hover:shadow-md transition">
+            <div key={index} className="bg-white rounded-2xl shadow hover:shadow-md transition">
               <img
                 src={post.image}
                 alt={post.title}
@@ -66,7 +66,7 @@ export default function CareerResources() {
                   Read More →
                 </Link>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>

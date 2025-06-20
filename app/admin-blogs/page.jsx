@@ -5,6 +5,7 @@ import { Search, Calendar, User, Clock, ArrowRight, TrendingUp, BookOpen, Filter
 import { useRouter } from "next/navigation";
 import { CiEdit } from "react-icons/ci";
 import Link from "next/link";
+import { IoTrashOutline } from "react-icons/io5";
 // import { articles } from "@/lib/joba-sample-2"
 
 
@@ -135,6 +136,16 @@ export default function ArticlesBlogPage() {
       fetchJobs()
     }, [page,limit])
 
+
+    const deleteBlog = async (id) => {
+      const res = await fetch(`/api/delete-blog/${id}`,{
+          method:"DELETE",
+          headers:{
+              'Content-Type':"application/json"
+          }
+      })
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -222,6 +233,10 @@ export default function ArticlesBlogPage() {
                     <Link href={`/edit-blog/${article._id}`} className="text-blue-600 hover:underline flex items-center gap-1">
                     <CiEdit size={30} />
                     </Link>
+                     <button onClick={()=>deleteBlog(article._id)}>
+                                        <IoTrashOutline size={23} className='text-rose-300'/>
+                    
+                                        </button>
                       
                     </div>
                   </div>

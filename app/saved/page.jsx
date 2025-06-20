@@ -9,6 +9,11 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { BriefcaseIcon, ExternalLinkIcon, RefreshCw, SearchIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useRouter } from 'next/navigation'
+
+dayjs.extend(relativeTime);
 
 
 
@@ -16,6 +21,7 @@ function Saved() {
     const [jobs,setJobs] = React.useState([])
     const [loading,setLoading] = React.useState(true)
     console.log(jobs)
+    const router = useRouter()
    
    
 
@@ -30,7 +36,20 @@ function Saved() {
         fetchData()
       }, [])
 
-      
+
+      const handleDelete = async (item) => {
+        setLoading(true)
+        
+          const res = await fetch(`/api/delete-wish-item/${item.title}`, {
+            method: 'DELETE',
+          })
+    
+          const data = await res.json()
+    
+         
+        router.refresh()
+        
+      }
   return (
    <main className='pt-10 pb-5 px-7'>
     {jobs.length>0?(<div>
@@ -64,7 +83,7 @@ function Saved() {
     <div className='flex flex-col gap-5 mt-5'>
         {
             jobs?.map((job) => (
-                <div key={job.Id} className='shadow-lg p-5 flex flex-col sm:flex-row gap-5 sm:gap-50 rounded-lg border-gray-500 border-[1.2px] hover:shadow-xl transition-all duration-200'>
+                <div key={job._id} className='shadow-lg p-5 flex flex-col sm:flex-row gap-5 sm:gap-50 rounded-lg border-gray-500 border-[1.2px] hover:shadow-xl transition-all duration-200'>
                     <div className='sm:flex gap-3'>
                         <img src={job.employer_logo} alt="" className='h-12 w-12 rounded-lg'/>
                         <div>
@@ -81,11 +100,11 @@ function Saved() {
                                 {job.type}
 
                                 </div>
-                                <div className='flex gap-1 items-center text-gray-500'>
+                                {/* <div className='flex gap-1 items-center text-gray-500'>
                                 <IoMdTime />
                               <p>posted 2 days ago</p>
 
-                                </div>
+                                </div> */}
 
                             </div>
 
@@ -105,8 +124,12 @@ function Saved() {
 
                     <div className='flex flex-col sm:h-70 '>
                         <div className='flex gap-5 items-center justify-end'>
-                            <p className='text-xs border-black border-[1.2px] rounded-full p-1 whitespace-nowrap'>Saved yesterday</p>
+                            <p className='text-xs border-black border-[1.2px] rounded-full p-1 whitespace-nowrap'>Saved {dayjs(job.updatedAt).fromNow()}</p>
+                            <button onClick={()=>handleDelete(job)}>
                             <FaRegTrashAlt className='text-rose-400'/>
+
+                            </button>
+                            
                         </div>
 
                         <div className='flex gap-5 text-xs mt-5 sm:mt-auto'>

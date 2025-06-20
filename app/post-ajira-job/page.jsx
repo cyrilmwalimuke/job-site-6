@@ -5,6 +5,9 @@ import { LuBriefcase } from "react-icons/lu";
 import { TbWorldWww } from "react-icons/tb";
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { redirect } from "next/navigation";
+
+import { useUser } from "@clerk/nextjs"
 
 const jobFields = [
     "Software Development",
@@ -22,6 +25,7 @@ const jobFields = [
 
 
 export default function page() {
+
     const [file, setFile] = useState(null);
     const fileRef = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -108,8 +112,6 @@ export default function page() {
 
       
 
-    console.log(formData)
-
     const handleChange = (e) => {
         setFormData({...formData, [e.target.id]: e.target.value })
         
@@ -125,6 +127,7 @@ export default function page() {
             body:JSON.stringify(formData)
         })
     }
+    console.log(formData)
   return (
     <div className='px-5 sm:px-40 py-10'>
         <header className='flex flex-col mb-7 '>

@@ -87,94 +87,58 @@ export default function Header() {
   
   return (
     <>
-  
-            <header className=' flex justify-between px-5 py-3 bg-background/80 backdrop-blur-md shadow-sm sticky top-0 z-30 items-center '>
-        <div className='flex items-center'>
-        <CiMenuBurger className='sm:hidden' size={30} onClick={()=>setSideBar(true)}/>
+
+    <div className='flex justify-between px-5 py-3 bg-background/80 backdrop-blur-md shadow-sm sticky  top-0 z-30 ites-center'>
+          <CiMenuBurger className='sm:hidden' size={30} onClick={()=>setSideBar(true)}/>
+          <Link href='/'> <Image src='/site-logo.png' width={100}height={50} alt='logo'/></Link>
+          <div className='hidden md:flex gap-1'>
+          {navItems.map((item, index) => (
+              <Link key={index} href={item.link} className='p-2 text-sm hover:bg-gray-200 rounded-md font-semibold'>
+                  {item.name}
+            </Link>
+          ))}
+
+          </div>
+
+          <div className='flex gap-5'>
+                <form onSubmit = {handleSearchSubmit} className='rounded-full border-gray-500 border-[1.2px]  items-center p-2 gap-2 hidden sm:flex'>
+                  <button className='cursor-pointer'>
+                      <CiSearch/>
+                  </button>
+                  <input type="text" placeholder='Search Jobs...' className='focus:outline-none' value={searchTerm}  onChange={(e) => setSearchTerm(e.target.value)} />
+
+              </form>
+
+              <div className='flex gap-2 items-center'>
+                  <Link href='/search' className='sm:hidden'><CiSearch size={30} /></Link>
+                  {user?
+                  (
+                  <div className='flex items-center gap-3'>
+                    <Link href='/saved' className='text-2xl'><CiBookmark size={26}/></Link>
+                    <UserButton afterSignOutUrl="/" />
+
+
+                  </div>
+                  )
+                  :
+                  (
+                    <Link className='bg-black text-white text-sm rounded-lg p-2' href='/login'>Login</Link>
+
+                  )
+                  }
+                
+
+              </div>
+
+
+
+
+          </div>
+
        
-
-         
-          <Link href='/'>
-          <Image src='/jobs-logo.png' height={20} width={150} alt='logo'/>
-          </Link>
-
-            
-      
-       
-        </div>
-
-
-
-    <div className='hidden md:flex gap-1 '>
-       {navItems.map((item, index) => (
-        <Link key={index} href={item.link} className='p-2 text-sm hover:bg-gray-200 rounded-md font-semibold'>
-          {item.name}
-        </Link>
-      ))}
-
-
-
 
     </div>
-
-
-    <div className='hidden sm:flex gap-5 items-center'>
-
-    <form onSubmit = {handleSearchSubmit} className='rounded-full border-gray-500 border-[1.2px]  items-center p-2 flex gap-2'>
-            <button className='cursor-pointer'>
-                <CiSearch/>
-            </button>
-            <input type="text" placeholder='Search Jobs...' className='focus:outline-none' value={searchTerm}  onChange={(e) => setSearchTerm(e.target.value)} />
-
-        </form>
-       {user?(<div className='flex items-center gap-2 font-semibold'>
-       
-       <Link href='/saved' className='text-2xl'><CiBookmark size={26}/></Link>
-        <UserButton afterSignOutUrl="/" />
-
-        
-
-
-       </div>):(<div className='flex gap-3 font-semibold text-sm'>
-        <Link className='p-2 hover:bg-gray-200 rounded-md' href='/login'>Login</Link>
-        <Link className='p-2 hover:bg-gray-200 rounded-md' href='/register'>Register</Link>
-
-       </div>)}
-    
-   
-
-     
-        <Link href='/post-job' className='p-2 hover:bg-gray-100 rounded-2xl text-sm font-semibold flex gap-2 items-center'>
-        <SlBriefcase />
-        <p className='flex items-center'>Post a Job 👑</p>
-
-        </Link>
-
-    </div>
-
-
-
-
-
-        
-
-
-        <div className='flex sm:hidden text-2xl gap-3 items-center'>
-     
-      {user && <Link href='/saved' className='text-2xl'><CiBookmark /></Link>}
-          <Link href='/search'><CiSearch /></Link>
-          {user?<UserButton/>:<Link className='bg-black text-white text-sm rounded-lg p-2' href='/login'>Login</Link>}
-        
-
-        </div>
-        
-        
-
-        
-
-
-      
-    </header>
+ 
            
          
 

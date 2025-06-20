@@ -18,22 +18,22 @@ const geistMono = Geist_Mono({
 
 
 export const metadata = {
-  title: 'AjiraConnect – Find Jobs in Kenya',
-  description: 'Discover thousands of job opportunities across Kenya. Browse jobs by category, location, and experience level. Start your career journey with AjiraConnect today.',
+  title: 'JobsKe – Find Jobs in Kenya',
+  description: 'Find Your Dream Job Today.Discover thousands of job opportunities with all the information you need. Your next career move starts here.',
   keywords: ['Kenya jobs', 'Job board Kenya', 'find jobs', 'Ajira', 'Nairobi jobs', 'remote jobs Kenya', 'ajira Connect'],
-  authors: [{ name: 'AjiraConnect Team', url: 'https://jobsafari.com' }],
-  creator: 'AJiraConnect',
+  authors: [{ name: 'JobsKe Team', url: 'https://jobske.com' }],
+  creator: 'JobsKe',
   openGraph: {
-    title: 'AjiraConnect – Find Jobs in Kenya',
+    title: 'JobsKe – Find Jobs in Kenya',
     description: 'Kenya\'s smart job board helping you connect with top employers. Explore job listings by industry, location, or company.',
-    url: 'https://ajiraconnect.com',
-    siteName: 'ajiraConnect',
+    url: 'https://jobske.com',
+    siteName: 'JobsKe',
     images: [
       {
         url: 'https://ajiraconnect.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'AjiraConnect – Job board in Kenya',
+        alt: 'JobsKe – Job board in Kenya',
       },
     ],
     locale: 'en_KE',
@@ -41,10 +41,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JobSafari – Jobs in Kenya',
+    title: 'JobsKe – Jobs in Kenya',
     description: 'Smart job listings and career opportunities in Kenya.',
-    site: '@jobsafari_ke',
-    creator: '@jobsafari_ke',
+    site: '@jobs_ke',
+    creator: '@jobs_ke',
     images: ['https://jobsafari.co.ke/twitter-card.jpg'],
   },
   robots: {

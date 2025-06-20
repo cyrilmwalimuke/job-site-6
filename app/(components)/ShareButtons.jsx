@@ -46,7 +46,7 @@ export default function ShareButtons({ title }) {
   const whatsappText = encodeURIComponent(`${title} - ${shareUrl}`)
 
   return (
-    <div className="flex space-x-4 mt-4 items-center">
+    <div className="flex space-x-4 items-center">
       <a
         href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
         target="_blank"
@@ -80,7 +80,7 @@ export default function ShareButtons({ title }) {
       >
         <FaLinkedin size={24} />
       </a>
-      <div>You are using a {device} device.</div>
+      {/* <div>You are using a {device} device.</div> */}
       
     </div>
   )

@@ -12,7 +12,7 @@ export default function AboutUsPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             <div className="space-y-6">
               <div  className="w-fit text-sm bg-white rounded-full px-4">
-                About TalentConnect
+                About JobsKe
               </div>
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
                 Connecting talent with opportunity

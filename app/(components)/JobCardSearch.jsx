@@ -1,6 +1,10 @@
 import React from 'react'
 import { Bookmark, Briefcase, Clock, DollarSign, ExternalLink,  MapPin } from "lucide-react"
 import Link from 'next/link'
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 export default function JobCardSearch({job}) {
   console.log(job._Id)
@@ -29,7 +33,7 @@ export default function JobCardSearch({job}) {
       </div>
       <div className="flex items-center gap-2 text-gray-500 mt-2">
         <Clock size={16} />
-        <span>Posted: {job.posted_at}</span>
+        <span>Posted: {dayjs(job.updatedAt).fromNow()}</span>
       </div>
       <p className="text-gray-700 mt-4 text-sm line-clamp-3">
         {job.description}
