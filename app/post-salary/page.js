@@ -136,7 +136,7 @@ export default function Page() {
         <form onSubmit={handleSubmit} className='shadow-md p-5 rounded-lg'>
             <header>
                 <h1 className='text-2xl font-bold'>Job Details</h1>
-                <p className='text-gray-500 text-sm'>Provide the details about the position you're hiring for.</p>
+                <p className='text-gray-500 text-sm'>Provide the details about the position you&apos;re hiring for.</p>
             </header>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5'>
