@@ -67,12 +67,12 @@ export default function RootLayout({ children }) {
       
       >
         <Suspense>
-        {/* <Header/> */}
+        <Header/>
         {children}
 
         </Suspense>
      
-        {/* <Footer/> */}
+        <Footer/>
       </body>
     </html>
     </ClerkProvider>
