@@ -6,6 +6,7 @@ const JobSchema = new mongoose.Schema({
   location: { type: String, required: true },
   description: { type: String, required: true },
   salary: { type: Number, default: null },
+  expiry: Date,
   type: { type: String }, // e.g., Full-time, Part-time
   experience: { type: String }, // e.g., Entry, Mid, Senior
   responsibilities: { type: String },

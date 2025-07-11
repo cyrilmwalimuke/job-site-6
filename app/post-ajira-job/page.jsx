@@ -119,13 +119,15 @@ export default function page() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log("Form submitted")
-        const res  =await fetch('http://localhost:3000/api/save-job', {
+        const res  =await fetch('/api/save-job', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(formData)
         })
+        const data = await res.json()
+        console.log(data)
     }
     console.log(formData)
   return (
