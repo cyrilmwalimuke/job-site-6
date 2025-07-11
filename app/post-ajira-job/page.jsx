@@ -5,9 +5,10 @@ import { LuBriefcase } from "react-icons/lu";
 import { TbWorldWww } from "react-icons/tb";
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 import { useUser } from "@clerk/nextjs"
+import { Router } from 'lucide-react';
 
 const jobFields = [
     "Software Development",
@@ -29,6 +30,8 @@ export default function page() {
     const [file, setFile] = useState(null);
     const fileRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [submitting,setSubmitting] = useState(false);
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -117,7 +120,9 @@ export default function page() {
         
     }
     const handleSubmit = async (e) => {
+    
         e.preventDefault()
+        setSubmitting(true)
         console.log("Form submitted")
         const res  =await fetch('/api/save-job', {
             method:'POST',
@@ -128,6 +133,8 @@ export default function page() {
         })
         const data = await res.json()
         console.log(data)
+        setSubmitting(false)
+        router.refresh()
     }
     console.log(formData)
   return (
@@ -405,10 +412,14 @@ export default function page() {
                 Cancel
 
             </Link>
-            <button className='py-3 px-6 text-white bg-black rounded-md text-sm font-semibold  hover:bg-gray-800'>
+            {submitting ? (  <button className='py-3 px-6 text-white bg-black rounded-md text-sm font-semibold  hover:bg-gray-800'>
+                submitting...
+
+            </button>):(  <button className='py-3 px-6 text-white bg-black rounded-md text-sm font-semibold  hover:bg-gray-800'>
                 Post Job
 
-            </button>
+            </button>)}
+          
 
 
            </div>
