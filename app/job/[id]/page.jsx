@@ -7,7 +7,6 @@ import { ArrowLeft, Bookmark,Briefcase ,Building2, Calendar, Clock, DollarSign, 
 
 import { GoDotFill } from 'react-icons/go'
 import { useParams, useRouter } from 'next/navigation'
-import { jobs } from '@/data/jobs2'
 import ShareButtons from '@/app/(components)/ShareButtons'
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
