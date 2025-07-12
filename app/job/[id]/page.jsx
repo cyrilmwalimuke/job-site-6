@@ -49,7 +49,7 @@ export default  function Job({params}) {
     };
 
     fetchJob();
-  }, [id]);
+  }, [slug]);
 
 
   const addToWishList = async (thisProduct) => {
