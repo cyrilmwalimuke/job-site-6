@@ -2,12 +2,12 @@ import { DollarSign, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
-export default function SimilarJobs() {
+export default function SimilarJobs({id}) {
     const [similarJobs,setSimilarJobs] = useState([])
 
     useEffect(()=>{
         const fetchJobs  = async () =>{
-            const res  = await fetch('/api/find-jobs')
+            const res  = await fetch(`/api/get-related-jobs/${id}`)
             const data  = await res.json()
             setSimilarJobs(data)
 
@@ -31,12 +31,7 @@ export default function SimilarJobs() {
                 <MapPin className="h-3 w-3 mr-1" />
                 {relatedJob.location},Kenya
               </div>
-              {/* {relatedJob.salary && (
-                <div className="flex items-center">
-                  <DollarSign className="h-3 w-3 mr-1" />
-                  {relatedJob.salary}
-                </div>
-              )} */}
+             
             </div>
           </Link>
         </div>

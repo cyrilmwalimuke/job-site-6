@@ -156,9 +156,9 @@ if (loading) return <JobLoadingSkeleton/>
             </div>
 
             <div className="flex flex-wrap gap-3 mt-6 items-center ">
-              <button className="border-[1.2px] border-gray-500 rounded-md p-2 hover:bg-gray-50 flex justify-center items-center">
+              <Link href={jobData.applicationValue} className="border-[1.2px] border-gray-500 rounded-md p-2 hover:bg-gray-50 flex justify-center items-center">
                 Apply Now
-              </button>
+              </Link>
               <button variant="outline" size="icon">
                 <Share2 className="h-6 w-6" />
               
@@ -178,54 +178,24 @@ if (loading) return <JobLoadingSkeleton/>
 
           {/* Job Details */}
           <div className="bg-white rounded-xl shadow-sm p-6 border ">
-            <div className="prose max-w-none">
-              <h2 className='font-semibold text-lg'>Job Description</h2>
-              <p>{jobData.description}</p>
+          
+          <div className="prose max-w-none">
+  <h2 className='font-semibold text-lg'>Job Description</h2>
+  <p>{jobData.description}</p>
 
-            
+  <h3 className='font-semibold text-lg mt-3'>Responsibilities</h3>
+  <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.responsibilities }} />
 
-              <h3 className='font-semibold text-lg mt-3'>Responsibilities</h3>
-              {/* {
-                jobData.responsibilities.map((responsibility) => {
-                    return(
-                        <div className='flex gap-2 ' key={responsibility}>
-                            <GoDotFill size={18} />
-                            <p>{responsibility}</p>
-
-                        </div>
-                    )
-
-                })
-              } */}
-            
-            {/* {jobData.responsibilities} */}
-
-            <div className="prose  prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.responsibilities }} />
-
-
-
-            
-
-              <h3 className='mt-3 font-semibold text-lg'>Requirements:</h3>
-
-              {/* {
-  jobata.education_qualification_experience_skills_traits.map((responsibility) => (
-    <div className="flex items-center gap-2" key={responsibility}>
-      <GoDotFill className="w-5 h-5 shrink-0 text-gray-600" />
-      <p className="text-base">{responsibility}</p>
-    </div>
-  ))
-} */}
-
-{jobData.education_qualification_experience_skills_traits}
+  <h3 className='mt-3 font-semibold text-lg'>Requirements:</h3>
+  <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.education_qualification_experience_skills_traits }} />
+</div>
 
 
 
 
 
 
-             
-            </div>
+           
 
             <div className="mt-8">
               {/* <h3 className="text-lg font-semibold mb-3">Skills & Expertise</h3> */}
@@ -241,7 +211,18 @@ if (loading) return <JobLoadingSkeleton/>
 
           {/* Application Form */}
           {/* <JobApplication jobId={job.id} jobTitle={job.title} /> */}
+
+          <div className='rounded-xl shadow-sm border-black p-4 border-[1.2px]'>
+          <h3 className='font-semibold text-lg mt-3'>How to Apply</h3>
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.applicationInstructions }} />
+
+
+
+          </div>
+         
         </div>
+
+       
 
         <div className="space-y-8">
           {/* Company Info */}
@@ -263,7 +244,7 @@ if (loading) return <JobLoadingSkeleton/>
             </div>
 
 
-            <SimilarJobs/>
+            <SimilarJobs id={jobData._id}/>
 
          
 

@@ -15,7 +15,11 @@ const JobSchema = new mongoose.Schema({
   applicationMethod: { type: String, enum: ['url', 'email'], default: 'url' },
   applicationValue: { type: String },
   companyWebsite: { type: String },
-  employer_logo: { type: String }
+  employer_logo: { type: String },
+  applicationInstructions: { type: String, default: '' },
+  deadline:{ type: String, default: '' }
+
 }, { timestamps: true });
 
 export default mongoose.models.Job || mongoose.model('Job', JobSchema);
+

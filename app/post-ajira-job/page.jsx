@@ -162,6 +162,17 @@ export default function page() {
 
                 </div>
 
+
+                <div>
+                    <label htmlFor="" className='font-semibold'>Deadline</label>
+                    <div className='flex items-center border border-gray-300 rounded-md p-2 mt-2 gap-5'>
+                    <LuBriefcase className='text-gray-500'/>
+                        <input id='daedline'value={formData.deadline} onChange={handleChange} type="text" className='focus:outline-none w-full' placeholder='eg Senior Frontend Developer'/>
+                    </div>
+
+
+                </div>
+
                 <div>
                     <label htmlFor="" className='font-semibold'>Company Name*</label>
                     <div className='flex items-center border border-gray-300 rounded-md p-2 mt-2 gap-5'>
@@ -269,6 +280,7 @@ export default function page() {
                 <textarea type='text' value={formData.description} id="description" onChange={handleChange} cols="30" rows="5" className='border border-gray-300 rounded-md p-2 focus:outline-none' placeholder='Describe the job summary'></textarea>
 
                 </div>
+                
 
                 <div className='flex flex-col'>
                 <label htmlFor="" className='font-semibold'>Responsibilities*</label>
@@ -279,18 +291,37 @@ export default function page() {
                 <div className='flex flex-col'>
                 <label htmlFor="" className='font-semibold'>Education qualification experience skills and traits*</label>
                 <textarea
-  value={formData.education_qualification_experience_skills_traits}
-  id="education_qualification_experience_skills_traits"
-  onChange={handleChange}
-  cols="30"
-  rows="5"
-  className="border border-gray-300 rounded-md p-2 focus:outline-none"
-  placeholder="List the skills, experience, qualifications required for this position"
-/>
+                    value={formData.education_qualification_experience_skills_traits}
+                    id="education_qualification_experience_skills_traits"
+                    onChange={handleChange}
+                    cols="30"
+                    rows="5"
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none"
+                    placeholder="List the skills, experience, qualifications required for this position"
+                  />
 
          
 
                 </div>
+
+
+                <div className='flex flex-col'>
+                <label htmlFor="" className='font-semibold'>How to Apply</label>
+                <textarea
+                    value={formData.applicationInstructions}
+                    id="applicationInstructions"
+                    onChange={handleChange}
+                    cols="30"
+                    rows="5"
+                    className="border border-gray-300 rounded-md p-2 focus:outline-none"
+                    placeholder="Application instructions (include link or email)"
+                  />
+
+         
+
+                </div>
+
+
 
                 
     
