@@ -41,7 +41,7 @@ export default function JobCardSearch({job}) {
       <div className="mt-4 flex flex-col gap-5  sm:flex-row sm:justify-between items-center">
        
      
-          <Link href={`/job/${job._id}`} className='flex w-full justify-center gap-2 items-center p-2 border-gray-500 border-[1.2px] rounded-md text-white bg-black'>
+          <Link href={`/job/${job.slug}`} className='flex w-full justify-center gap-2 items-center p-2 border-gray-500 border-[1.2px] rounded-md text-white bg-black'>
 
             <ExternalLink />
             <p>

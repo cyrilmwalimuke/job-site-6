@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import dbConnect from '@/lib/db';
 
 export async function GET(request, { params }) {
-  const { id } = await params;
+  const { slug} = await params;
 
   try {
     await dbConnect();
@@ -15,7 +15,7 @@ export async function GET(request, { params }) {
     //   return NextResponse.json({ error: 'Invalid job ID' }, { status: 400 });
     // }
 
-    const job = await Job.findById(id);
+    const job = await Job.findOne({ slug:slug });
 
     if (!job) {
       return NextResponse.json({ error: 'Job not found' }, { status: 404 });

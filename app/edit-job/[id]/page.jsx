@@ -88,7 +88,9 @@ export default function page() {
         applicationMethod:'url',
         applicationValue:"",
         companyWebsite:"",
-        employer_logo:""
+        employer_logo:"",
+        deadline:"",
+        applicationInstructions:""
 
 
     })

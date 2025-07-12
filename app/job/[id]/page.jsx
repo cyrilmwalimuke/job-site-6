@@ -26,7 +26,7 @@ dayjs.extend(relativeTime);
 
 
 export default  function Job({params}) {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [jobData, setJobData] = useState({});
   const [loading, setLoading] = useState(true);
   console.log(jobData)
@@ -38,7 +38,7 @@ export default  function Job({params}) {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`/api/find-job/${id}`);
+        const res = await fetch(`/api/find-job/${slug}`);
         const data = await res.json();
         setJobData(data);
       } catch (error) {
@@ -215,6 +215,7 @@ if (loading) return <JobLoadingSkeleton/>
           <div className='rounded-xl shadow-sm border-black p-4 border-[1.2px]'>
           <h3 className='font-semibold text-lg mt-3'>How to Apply</h3>
           <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.applicationInstructions }} />
+          <p className='font-bold'>Deadline:<span>{jobData.deadline}</span></p>
 
 
 
