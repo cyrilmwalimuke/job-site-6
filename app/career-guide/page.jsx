@@ -374,7 +374,8 @@ const categories = [
 ];
 
 export default async function ArticlesBlogPage({ searchParams }) {
-  const page = Number(searchParams?.page) || 1;
+  const params = await searchParams
+  const page = Number(params?.page) || 1
   const limit = 6;
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
