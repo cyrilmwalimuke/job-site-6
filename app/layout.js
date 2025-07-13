@@ -18,7 +18,11 @@ const geistMono = Geist_Mono({
 
 
 export const metadata = {
-  title: 'JobsKe – Find Jobs in Kenya',
+  title: {
+    default:'Find Jobs in Kenya',
+    template: '%s | JobsKe',
+  },
+ 
   description: 'Find Your Dream Job Today.Discover thousands of job opportunities with all the information you need. Your next career move starts here.',
   keywords: ['Kenya jobs', 'Job board Kenya', 'find jobs', 'Ajira', 'Nairobi jobs', 'remote jobs Kenya', 'ajira Connect'],
   authors: [{ name: 'JobsKe Team', url: 'https://jobske.com' }],
@@ -30,7 +34,7 @@ export const metadata = {
     siteName: 'JobsKe',
     images: [
       {
-        url: 'https://ajiraconnect.com/og-image.jpg',
+        url: 'https://jobske.com/site-identity.png',
         width: 1200,
         height: 630,
         alt: 'JobsKe – Job board in Kenya',
@@ -45,7 +49,7 @@ export const metadata = {
     description: 'Smart job listings and career opportunities in Kenya.',
     site: '@jobs_ke',
     creator: '@jobs_ke',
-    images: ['https://jobsafari.co.ke/twitter-card.jpg'],
+    images: ['https://jobske.com/site-identity.png'],
   },
   robots: {
     index: true,

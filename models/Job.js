@@ -18,7 +18,10 @@ const JobSchema = new mongoose.Schema({
   companyWebsite: { type: String },
   employer_logo: { type: String },
   applicationInstructions: { type: String, default: '' },
-  deadline:{ type: String, default: '' }
+  deadline: {
+    type: Date,
+    required: true
+  },
 
 }, { timestamps: true });
 

@@ -77,7 +77,7 @@ export default function AboutUsPage() {
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold">The Beginning</h3>
                 <p className="text-muted-foreground text-gray-500 ">
-                  Founded in 2018 by a team of tech enthusiasts, AjiraConnect was born from a
+                  Founded in 2018 by a team of tech enthusiasts, JobsKe was born from a
                   simple observation: the traditional job search process was broken. Both job seekers and employers were
                   struggling with inefficient, time-consuming processes that often led to poor matches.
                 </p>
@@ -135,7 +135,7 @@ export default function AboutUsPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div className="border-0 shadow-lg">
+            <div className="border-0 shadow-lg bg-white">
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Users className="w-8 h-8 text-blue-600" />
@@ -148,7 +148,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="border-0 shadow-lg">
+            <div className="border-0 shadow-lg bg-white">
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Target className="w-8 h-8 text-green-600" />
@@ -161,7 +161,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="border-0 shadow-lg">
+            <div className="border-0 shadow-lg bg-white">
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Heart className="w-8 h-8 text-purple-600" />
@@ -174,7 +174,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="border-0 shadow-lg">
+            <div className="border-0 shadow-lg bg-white">
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <TrendingUp className="w-8 h-8 text-orange-600" />
@@ -187,7 +187,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="border-0 shadow-lg">
+            <div className="border-0 shadow-lg bg-white">
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Globe className="w-8 h-8 text-red-600" />
@@ -200,7 +200,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="border-0 shadow-lg">
+            <div className="border-0 shadow-lg bg-white">
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Award className="w-8 h-8 text-yellow-600" />

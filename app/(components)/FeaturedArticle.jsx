@@ -1,3 +1,4 @@
+"use client"
 import { ArrowRight, Calendar, Clock, User } from 'lucide-react'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
@@ -9,7 +10,7 @@ export default function FeaturedArticle() {
 
     useEffect(()=>{
         const fetchFeatured  = async () =>{
-            const res = await fetch('/api/get-blog/2025-interview-tips-that-actually-work')
+            const res = await fetch('/api/get-blog/rrrrrr')
             const data  = await res.json()
             setFeaturedArticle(data)
         }

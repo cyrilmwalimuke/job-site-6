@@ -173,8 +173,8 @@ export default function ContactPage() {
                   <Mail className="h-5 w-5 text-orange-600 mt-1" />
                   <div>
                     <p className="font-bold">Email</p>
-                    <p className="text-sm text-muted-foreground">support@jobskenya.co.ke</p>
-                    <p className="text-sm text-muted-foreground">employers@jobskenya.co.ke</p>
+                    <p className="text-sm text-muted-foreground">info@jobske.co.ke</p>
+                  
                   </div>
                 </div>
 

@@ -6,6 +6,9 @@ import { TbWorldWww } from "react-icons/tb";
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { redirect, useRouter } from "next/navigation";
+import { FiLink } from 'react-icons/fi'; // A chain/link icon
+import { FaMoneyBill1 } from "react-icons/fa6";
+
 
 import { useUser } from "@clerk/nextjs"
 import { Router } from 'lucide-react';
@@ -164,19 +167,33 @@ export default function page() {
 
 
                 <div>
-                    <label htmlFor="" className='font-semibold'>Deadline</label>
+                
+                    <label htmlFor="deadline" className=" font-bold">
+                      Application Deadline*
+                    </label>
+
                     <div className='flex items-center border border-gray-300 rounded-md p-2 mt-2 gap-5'>
-                    <LuBriefcase className='text-gray-500'/>
-                        <input id='deadline'value={formData.deadline} onChange={handleChange} type="text" className='focus:outline-none w-full' placeholder='eg Friday 5th july 2025'/>
-                    </div>
+                   
+                        <input
+                          type="datetime-local"
+                          id="deadline"
+                          name="deadline"
+                          value={formData.deadline}
+                          onChange={handleChange}
+                          className="w-full text-gray-500 focus:outline-none"
+                        />
+                    </div> 
+
+                  
+
 
 
                 </div>
                 <div>
                     <label htmlFor="" className='font-semibold'>Slug</label>
                     <div className='flex items-center border border-gray-300 rounded-md p-2 mt-2 gap-5'>
-                    <LuBriefcase className='text-gray-500'/>
-                        <input id='slug'value={formData.slug} onChange={handleChange} type="text" className='focus:outline-none w-full' placeholder='eg Senior Frontend Developer'/>
+                    <FiLink className='text-gray-500'/>
+                        <input id='slug'value={formData.slug} onChange={handleChange} type="text" className='focus:outline-none w-full' placeholder='eg electrician-at-kenyapower'/>
                     </div>
 
 
@@ -197,7 +214,7 @@ export default function page() {
                 <div>
                     <label htmlFor="" className='font-semibold'>Salary*</label>
                     <div className='flex items-center border border-gray-300 rounded-md p-2 mt-2 gap-5'>
-                    <LuBriefcase className='text-gray-500'/>
+                    <FaMoneyBill1 className='text-gray-500'/>
                         <input id='salary' value={formData.salary} type="number" className='focus:outline-none w-full' placeholder='eg 30000' onChange={handleChange}/>
                     </div>
 

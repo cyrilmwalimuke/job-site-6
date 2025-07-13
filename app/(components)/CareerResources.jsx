@@ -1,26 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 
-// const blogPosts = [
-//   {
-//     title: "Top 10 CV Mistakes to Avoid in 2025",
-//     excerpt: "Your CV might be costing you interviews. Here's what to fix immediately.",
-//     image: "https://media.istockphoto.com/id/2169837352/photo/job-applicant-having-interview.jpg?s=1024x1024&w=is&k=20&c=u1RudP8I73c5_acHPOGxAkaI_hQq_dy6-d37Y_ioHZU=",
-//     link: "/blog/top-cv-mistakes",
-//   },
-//   {
-//     title: "How to Ace Your Next Interview",
-//     excerpt: "Master common questions, body language, and storytelling techniques.",
-//     image: "https://media.istockphoto.com/id/1362265077/photo/business-people-signing-a-contract.jpg?s=1024x1024&w=is&k=20&c=phbUuyNTmXRXY3aH5pyzTAewofSrzEGUrqAOCLuxvDA=",
-//     link: "/blog/ace-your-interview",
-//   },
-//   {
-//     title: "Remote Jobs: Where to Look and How to Stand Out",
-//     excerpt: "The demand for remote talent is growing. Here's how to get noticed.",
-//     image: "https://images.unsplash.com/photo-1672854207187-e70df893755b?q=80&w=1942&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     link: "/blog/remote-job-tips",
-//   },
-// ];
+
 
 
 
@@ -52,7 +33,7 @@ export default function CareerResources() {
           <p className="text-gray-600 mt-2">Tips and advice to help you grow your career</p>
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post, index) => (
+          {blogPosts.slice(0,3).map((post, index) => (
             <div key={index} className="bg-white rounded-2xl shadow hover:shadow-md transition">
               <img
                 src={post.image}
@@ -68,6 +49,15 @@ export default function CareerResources() {
               </div>
             </div>
           ))}
+
+          
+          <div className="mt-8 w-full flex justify-center">
+              <Link href='/career-guide' className='bg-black px-4 py-2 rounded-md text-white'>
+                  View All Posts
+              </Link>
+          </div>
+
+
         </div>
       </div>
     </section>

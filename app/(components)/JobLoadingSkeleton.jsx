@@ -1,4 +1,4 @@
-"use client";
+
 
 import { ArrowLeft, Briefcase, MapPin, Clock, Calendar, Share2, Bookmark } from "lucide-react";
 
