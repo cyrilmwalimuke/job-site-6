@@ -15,7 +15,8 @@ export default function JobCardSearch({job}) {
       <img
         src={job.employer_logo} 
         alt={job.employer_name}
-        className="w-12 h-12 rounded-full object-cover"
+        className="w-12 h-12 rounded-full object-cover
+        "
       />
       <div>
         <h2 className="text-xl font-semibold">{job.title}</h2>

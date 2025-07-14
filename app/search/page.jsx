@@ -42,10 +42,7 @@ function getPaginationPages(currentPage, totalPages) {
 
 
 
-// export function useQuery() {
-//     const searchParams = useSearchParams();
-//     return searchParams;
-//   }
+
 
 export default function Search2() {
   const searchParams = useSearchParams()
@@ -234,7 +231,7 @@ const handleExperienceChange = (level) => {
 
 
   return (
-    <main ref={myRef} className="container mx-auto px-4 py-8 pt-20">
+    <main ref={myRef} className="container mx-auto px-8 py-8">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-2">Find your dream job</h2>
         <p className="text-gray-600">Discover thousands of job opportunities with all the information you need.</p>
@@ -246,7 +243,7 @@ const handleExperienceChange = (level) => {
   
 
 
-      <form className='rounded-lg  bg-slate-500  shadow-sm p-4 sm:px-8 mb-8 flex flex-col gap-5 items-center justify-center  sm:justify-between sm:flex-row' onSubmit={handleSubmit}>
+      <form className='rounded-lg  bg-slate-500 sm:w-250 sm:mx-auto shadow-sm p-4  sm:px-8 mb-8 flex flex-col gap-5 items-center justify-center  sm:justify-between sm:flex-row' onSubmit={handleSubmit}>
         <div className='flex justify-between items-center '>
         <div className="relative flex items-center border  border-gray-100  rounded-lg p-2 mr-1 ml-auto bg-white">
             <IoSearch className="absolute  left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -259,10 +256,10 @@ const handleExperienceChange = (level) => {
           
           </div>
           <div 
-          onClick={() => setShowFilters(!showFilters)}
+                onClick={() => setShowFilters(!showFilters)}
 
          
-          className = {`sm:hidden font-bold p-2 rounded-md ${showFilters?'bg-teal-100':'bg-white'}`}
+                  className = {`sm:hidden font-bold p-2 rounded-md ${showFilters?'bg-teal-100':'bg-white'}`}
           >
           <CiFilter size={20}  />
 

@@ -46,7 +46,10 @@ export default async function sitemap() {
             url: `${baseUrl}/contact`,
             lastModified: new Date(),
         },
-       
+        {
+          url: `${baseUrl}/career-guide`,
+          lastModified: new Date(),
+      },
 
 
     ]

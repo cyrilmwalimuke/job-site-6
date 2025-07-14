@@ -373,6 +373,51 @@ const categories = [
   "Networking"
 ];
 
+
+export async function generateMetadata() {
+
+  return {
+    title: 'Career Guide & Job Tips',
+    description: 'Explore job tips, CV writing guides, interview advice, and career growth strategies tailored for Kenyan job seekers.',
+    keywords: ['Kenya jobs', 'Job board Kenya', 'find jobs', 'Ajira', 'Nairobi jobs', 'remote jobs Kenya', 'ajira Connect'],
+  authors: [{ name: 'JobsKe Team', url: 'https://jobske.com' }],
+  creator: 'JobsKe',
+  openGraph: {
+    title: 'JobsKe – Find Jobs in Kenya',
+    description: 'Explore job tips, CV writing guides, interview advice, and career growth strategies tailored for Kenyan job seekers.',
+    url: 'https://jobske.com',
+    siteName: 'JobsKe',
+    images: [
+      {
+        url: 'https://jobske.com/site-identity.png',
+        width: 1200,
+        height: 630,
+        alt: 'JobsKe – Job board in Kenya',
+      },
+    ],
+    locale: 'en_KE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Career Guide & Job Tips',
+    description: 'Explore job tips, CV writing guides, interview advice, and career growth strategies tailored for Kenyan job seekers.',
+    site: '@jobs_ke',
+    creator: '@jobs_ke',
+    images: ['https://jobske.com/site-identity.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  };
+}
+
 export default async function ArticlesBlogPage({ searchParams }) {
   const params = await searchParams
   const page = Number(params?.page) || 1
