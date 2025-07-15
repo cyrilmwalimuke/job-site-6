@@ -4,6 +4,7 @@ import Header from "./(components)/Header";
 import Footer from "./(components)/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Suspense } from "react";
+import Script from "next/script";
 
 
 const geistSans = Geist({
@@ -66,6 +67,21 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
     <html lang="en">
+    <head>
+        <Script
+          id="structured-data-logo"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Radiant Metals Workshop",
+              url: "https://jobske.com",
+              logo: "https://jobske.com/site-identity.png",
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       

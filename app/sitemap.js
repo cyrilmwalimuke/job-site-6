@@ -1,6 +1,9 @@
+import { GiCoinsPile } from "react-icons/gi";
+
 export default async function sitemap() {
-    // const baseUrl = "https://jobske.com";
+
     const baseUrl = "https://jobske.com";
+
     
 
    const jobsResponse =await fetch(`${baseUrl}/api/find-jobs`, {
@@ -22,10 +25,32 @@ export default async function sitemap() {
       });
     const blogs = await blogsResponse.json();
 
-    const blogEntries = jobs.map(blog => ({
+    const blogEntries = blogs.map(blog => ({
         url: `${baseUrl}/blog/${blog.slug}`,
           lastModified: new Date(blog.updatedAt),
       }));
+
+
+        
+    const searchResponse =await fetch(`${baseUrl}/api/find-jobs`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+    });
+  const jobSearches = await searchResponse.json();
+  const searchEntries = jobSearches.map(search => {
+    const url = `${baseUrl}/search?page=1&type=&limit=6&salaryRange=&searchTerm=${encodeURIComponent(search.title)}&experienceLevel=&sort=createdAt&order=desc&jobLocation=&industry=`;
+  
+    return {
+      url: url.replace(/&/g, '&amp;'), // escape & for XML
+      lastModified: new Date(search.updatedAt),
+    };
+  });
+  
+    console.log(searchEntries)
+
+
+
+      
   
 
 
@@ -38,6 +63,8 @@ export default async function sitemap() {
         },
         ...postEntries,
         ...blogEntries,
+        ...searchEntries,
+      
         {
             url: `${baseUrl}/about`,
             lastModified: new Date(),

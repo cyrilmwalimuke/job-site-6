@@ -101,13 +101,13 @@ export default function Header() {
           </div>
 
           <div className='flex gap-5'>
-                <form onSubmit = {handleSearchSubmit} className='rounded-full border-gray-500 border-[1.2px]  items-center p-2 gap-2 hidden sm:flex'>
+                {/* <form onSubmit = {handleSearchSubmit} className='rounded-full border-gray-500 border-[1.2px]  items-center p-2 gap-2 hidden sm:flex'>
                   <button className='cursor-pointer'>
                       <CiSearch/>
                   </button>
                   <input type="text" placeholder='Search Jobs...' className='focus:outline-none' value={searchTerm}  onChange={(e) => setSearchTerm(e.target.value)} />
 
-              </form>
+              </form> */}
 
               <div className='flex gap-2 items-center'>
                   <Link href='/search' className='sm:hidden'><CiSearch size={30} /></Link>

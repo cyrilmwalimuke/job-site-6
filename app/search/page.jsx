@@ -1,112 +1,63 @@
 "use client"
-
 import { ChevronLeft, ChevronRight, MapPin} from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link'
 import { IoReload, IoSearch } from 'react-icons/io5';
-// import { useSearchParams } from 'next/navigation';
 import { useRouter, useSearchParams } from 'next/navigation';
-// import { jobs } from '@/data/jobs2';
 import JobCardSearch from '../(components)/JobCardSearch';
 import { BriefcaseIcon, SearchIcon, RefreshCw } from 'lucide-react';
 import { CiFilter, CiLocationOn, CiSearch } from 'react-icons/ci';
-import { FaFilter } from 'react-icons/fa';
+import { getPaginationPages } from '@/lib/pagination';
 
-
-function getPaginationPages(currentPage, totalPages) {
-  const pages = [];
-
-  if (totalPages <= 5) {
-    // show all pages
-    for (let i = 1; i <= totalPages; i++) pages.push(i);
-  } else {
-    // always show first, last, current, and surrounding pages
-    pages.push(1);
-
-    if (currentPage > 3) pages.push('...');
-
-    const startPage = Math.max(2, currentPage - 1);
-    const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-    for (let i = startPage; i <= endPage; i++) pages.push(i);
-
-    if (currentPage < totalPages - 2) pages.push('...');
-
-    pages.push(totalPages);
-  }
-
-  return pages;
-}
+export default function Search() {
 
 
 
 
-
-
-
-export default function Search2() {
   const searchParams = useSearchParams()
   const getParam = (key) => searchParams.get(key)
-
   const [searchTerm,setSearchTerm] = useState(getParam('searchTerm') || '')
-  
   const [page, setPage] = useState(1);
   const [jobType, setJobType] = useState("")
   const [salaryRange, setSalaryRange] = useState("");
-
   const [experienceLevel, setExperienceLevel] = useState([]);
   const [sort, setSort] = useState("createdAt");
   const [order, setOrder] = useState("desc");
   const [jobLocation, setJobLocation] = useState("")
   const [industry, setIndustry] = useState("")
   const [limit, setLimit] = useState(6)
-
-
   const router = useRouter()
   const myRef = useRef(null);
-  
-
-  
   const [loading, setLoading] = useState(false);
-  
-const [data, setData] = useState([]);
-const [showFilters, setShowFilters] = useState(true);
-const [totalPages, setTotalPages] = useState(1)
-;
-const [totalDispalyPages, setTotalDispalyPages] = useState(0);
+  const [data, setData] = useState([]);
+  const [showFilters, setShowFilters] = useState(true);
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalDispalyPages, setTotalDispalyPages] = useState(0);
 
+  useEffect(() => {
+      const checkScreenSize = () => {
+        if (window.innerWidth >= 768) {
+          // md and up
+          setShowFilters(true);
+        } else {
+          setShowFilters(false); // or keep current mobile state
+        }
+        };
 
+      checkScreenSize(); // Initial check
 
+      window.addEventListener('resize', checkScreenSize);
+      return () => window.removeEventListener('resize', checkScreenSize);
+  }, 
+  []);
 
-
-useEffect(() => {
-  const checkScreenSize = () => {
-    if (window.innerWidth >= 768) {
-      // md and up
-      setShowFilters(true);
-    } else {
-      setShowFilters(false); // or keep current mobile state
-    }
-  };
-
-  checkScreenSize(); // Initial check
-
-  window.addEventListener('resize', checkScreenSize);
-  return () => window.removeEventListener('resize', checkScreenSize);
-}, []);
-
-
-
-
-
-
-const handleExperienceChange = (level) => {
-    setExperienceLevel(prevLevels =>
-      prevLevels.includes(level)
-        ? prevLevels.filter(item => item !== level)
-        : [...prevLevels, level]
-    );
-  };
+    const handleExperienceChange = (level) => {
+        setExperienceLevel(prevLevels =>
+          prevLevels.includes(level)
+            ? prevLevels.filter(item => item !== level)
+            : [...prevLevels, level]
+        );
+      };
 
 
 
@@ -114,18 +65,7 @@ const handleExperienceChange = (level) => {
     setLoading(true)
     const fetchJobs = async () => {
       try {
-        // const params = new URLSearchParams({
-        //   searchTerm: searchTerm,
-        //   salaryRange: salaryRange,
-        //   industry: industry,
-        //   type: jobType,
-        //   experienceLevel: experienceLevel.join(','),
-        //   location: jobLocation,
-        //   sort: 'createdAt',
-        //   order: 'desc',
-        //   limit: limit,
-        //   page: page,
-        // })
+     
         const params = new URLSearchParams();
 
         params.set('page', page);
@@ -167,8 +107,6 @@ const handleExperienceChange = (level) => {
       myRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [page]);
-  
-
 
 
   const handleSubmit = async (e) => {
@@ -243,7 +181,7 @@ const handleExperienceChange = (level) => {
   
 
 
-      <form className='rounded-lg  bg-slate-500 sm:w-250 sm:mx-auto shadow-sm p-4  sm:px-8 mb-8 flex flex-col gap-5 items-center justify-center  sm:justify-between sm:flex-row' onSubmit={handleSubmit}>
+      <form className='rounded-lg  shadow-lg border-[1.2px] sm:w-250 sm:mx-auto  p-1 sm:p-2  sm:px-8 mb-8 flex flex-col gap-5 items-center justify-center  sm:justify-between sm:flex-row' onSubmit={handleSubmit}>
         <div className='flex justify-between items-center '>
         <div className="relative flex items-center border  border-gray-100  rounded-lg p-2 mr-1 ml-auto bg-white">
             <IoSearch className="absolute  left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -255,27 +193,19 @@ const handleExperienceChange = (level) => {
             <CiSearch size={20}/>
           
           </div>
-          <div 
-                onClick={() => setShowFilters(!showFilters)}
-
-         
-                  className = {`sm:hidden font-bold p-2 rounded-md ${showFilters?'bg-teal-100':'bg-white'}`}
+          <div onClick={() => setShowFilters(!showFilters)} className = {`sm:hidden font-bold p-2 rounded-md ${showFilters?'bg-teal-100':'bg-white'}`}
           >
           <CiFilter size={20}  />
-
           </div>
      
 
         </div>
          
 
-          <div className='hidden sm:flex h-10 w-[1px] bg-gray-200'>
+          <div className='hidden sm:flex h-10 w-[1px] bg-black'>
 
           </div>
-          {/* <div className="relative hidden sm:flex items-center border  border-gray-500  rounded-md p-2 bg-white">
-            <CiLocationOn className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <input placeholder="Job location" className="pl-10 focus:outline-none w-full" value={jobLocation} onChange={(e)=>setJobLocation(e.target.value)} />
-          </div> */}
+        
 
 <div className="relative hidden sm:flex items-center border border-gray-500 rounded-md p-2 bg-white">
   <CiLocationOn className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -460,14 +390,6 @@ const handleExperienceChange = (level) => {
 
     </div>
 
-      
-
-          
-
-
-
-
-
 
    {data.length>0 && !loading && (<div className="flex gap-2 items-center justify-center mt-6">
   <button
@@ -502,20 +424,11 @@ const handleExperienceChange = (level) => {
     Next
   </button>
 </div>
-)}
-
- 
-
-
-
-
-
-
-
-
-         
+)}     
         </div>
       </div>
     </main>
   );
 }
+
+
