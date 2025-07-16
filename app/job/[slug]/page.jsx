@@ -208,12 +208,27 @@ export default async function Job({ params }) {
               </div>
 
               <div className="flex flex-wrap gap-3 mt-6 items-center">
-                <Link
-                  href={jobData.applicationValue}
-                  className="border-[1.2px] border-gray-500 rounded-md p-2 hover:bg-gray-50 flex justify-center items-center"
-                >
-                  Apply Now
-                </Link>
+              {jobData.applicationValue.includes('@') ? (
+                  <a
+                    href={`mailto:${jobData.applicationValue}`}
+                     
+                  
+                    
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-[1.2px] border-gray-500 rounded-md p-2 hover:bg-gray-50 flex justify-center items-center"
+                  >
+                    Apply Now
+                  </a>
+                ) : (
+                  <Link
+                    href={jobData.applicationValue}
+                    className="border-[1.2px] border-gray-500 rounded-md p-2 hover:bg-gray-50 flex justify-center items-center"
+                  >
+                    Apply Now
+                  </Link>
+                )}
+
                 <button>
                   <Share2 className="h-6 w-6" />
                 </button>
