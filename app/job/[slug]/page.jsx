@@ -253,7 +253,7 @@ export default async function Job({ params }) {
 
             <div className='rounded-xl shadow-sm border-black p-4 border-[1.2px]'>
               <h3 className='font-semibold text-lg mt-3'>How to Apply</h3>
-              <div className="prose prose-lg  w-full break-words " dangerouslySetInnerHTML={{ __html: jobData.applicationInstructions }} />
+              <div className="prose prose-lg  w-full break-words [&_a]:break-all " dangerouslySetInnerHTML={{ __html: jobData.applicationInstructions }} />
               <p className='font-bold '>Deadline: <span className='underline'>{formatFancyDate(jobData.deadline)}</span></p>
             </div>
           </div>
