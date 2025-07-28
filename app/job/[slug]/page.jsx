@@ -115,7 +115,7 @@ export default async function Job({ params }) {
     "@context": "https://schema.org/",
     "@type": "JobPosting",
     "title": jobData.title,
-    "description": stripHtml(jobData.description).result,
+    "description": jobData.description,
     "datePosted": new Date(jobData.updatedAt).toISOString().split("T")[0],
     "validThrough": new Date(jobData.deadline).toISOString(),
     "employmentType": jobData.type?.toUpperCase() || "FULL_TIME",
