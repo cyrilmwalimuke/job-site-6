@@ -115,10 +115,15 @@ export default async function Job({ params }) {
     "@context": "https://schema.org/",
     "@type": "JobPosting",
     "title": jobData.title,
-    "description": jobData.description,
+    "description": stripHtml(jobData.description).result,
     "datePosted": new Date(jobData.updatedAt).toISOString().split("T")[0],
     "validThrough": new Date(jobData.deadline).toISOString(),
-    "employmentType": jobData.type,
+    "employmentType": jobData.type?.toUpperCase() || "FULL_TIME",
+    "identifier": {
+      "@type": "PropertyValue",
+      "name": jobData.employer_name,
+      "value": jobData._id
+    },
     "hiringOrganization": {
       "@type": "Organization",
       "name": jobData.employer_name,
@@ -137,18 +142,19 @@ export default async function Job({ params }) {
       "@type": "Country",
       "name": "KE"
     },
-    "baseSalary": jobData.salary
-      ? {
-          "@type": "MonetaryAmount",
-          "currency": "KES",
-          "value": {
-            "@type": "QuantitativeValue",
-            "value": Number(jobData.salary),
-            "unitText": "MONTH"
-          }
+    ...(jobData.salary && {
+      baseSalary: {
+        "@type": "MonetaryAmount",
+        "currency": "KES",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": Number(jobData.salary),
+          "unitText": "MONTH"
         }
-      : undefined
-  };
+      }
+    })
+  }
+  
 
 
   return (
