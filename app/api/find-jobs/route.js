@@ -7,7 +7,7 @@ export async function GET() {
   await dbConnect()
 
   try {
-    const jobs = await Job.find()
+    const jobs = await Job.find().sort({ createdAt: -1 })
     return NextResponse.json(jobs, { status: 200 })
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })
