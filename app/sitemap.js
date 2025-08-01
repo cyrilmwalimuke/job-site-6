@@ -70,7 +70,7 @@ export default async function sitemap() {
         return true;
       })
       .map(job => ({
-        url: `${baseUrl}/jobs/location/${job.location}`,
+        url: `${baseUrl}/jobs/location/${job.location.toLowerCase()}`,
         lastModified: new Date(job.updatedAt),
       }));
     
