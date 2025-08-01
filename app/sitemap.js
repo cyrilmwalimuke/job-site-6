@@ -2,7 +2,9 @@ import { GiCoinsPile } from "react-icons/gi";
 
 export default async function sitemap() {
 
-    const baseUrl = "https://jobske.com";
+    // const baseUrl = "https://jobske.com";
+    const baseUrl = "http://localhost:3000";
+
 
     
 
@@ -49,6 +51,46 @@ export default async function sitemap() {
     console.log(searchEntries)
 
 
+    const jobsLocationResponse = await fetch(`${baseUrl}/api/find-jobs`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+    });
+    
+    const jobsLocations = await jobsLocationResponse.json();
+    
+    // Create a Map to track unique locations
+    const seenLocations = new Set();
+    
+    const locationEntries = jobsLocations
+      .filter(job => {
+        if (!job.location || seenLocations.has(job.location)) {
+          return false;
+        }
+        seenLocations.add(job.location);
+        return true;
+      })
+      .map(job => ({
+        url: `${baseUrl}/jobs/location/${job.location}`,
+        lastModified: new Date(job.updatedAt),
+      }));
+    
+  
+      const titlesResponse =await fetch(`${baseUrl}/api/find-jobs`, {
+        next: { revalidate: 60 },
+        method: 'GET',
+      });
+    
+        const titles = await titlesResponse.json();
+    
+        const titleEntries = titles.map(job => ({
+          url: `${baseUrl}/jobs/title/${job.title.toLowerCase().replace(/\s+/g, '-')}`,
+            lastModified: new Date(job.updatedAt),
+        }));
+    
+
+
+    
+
 
       
   
@@ -64,6 +106,24 @@ export default async function sitemap() {
         ...postEntries,
         ...blogEntries,
         ...searchEntries,
+        ...locationEntries,
+        ...titleEntries,
+        {
+            url: `${baseUrl}/jobs`,
+            lastModified: new Date(),
+        },
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: new Date(),
+        },
+        {
+            url: `${baseUrl}/search`,
+            lastModified: new Date(),
+        },
+        {
+            url: `${baseUrl}/about-us`,
+            lastModified: new Date(),
+        },
       
         {
             url: `${baseUrl}/about`,

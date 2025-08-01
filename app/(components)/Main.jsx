@@ -42,7 +42,7 @@ export default function Main() {
       <p className="mt-2 text-muted-foreground">Explore our handpicked selection of top job opportunities</p>
     </div>
 
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
      
       {
         jobs.slice(0,6).map((job) => (

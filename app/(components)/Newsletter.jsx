@@ -139,19 +139,24 @@ export default function NewsletterSubscription() {
                     />
                   </div>
 
-                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 flex items-center text-white px-20 rounded-md  py-3" disabled={isLoading}>
-                    {isLoading ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Subscribing...
-                      </>
-                    ) : (
-                      <>
-                        <Mail className="h-4 w-4 mr-2" />
-                        Subscribe to Newsletter
-                      </>
-                    )}
-                  </button>
+                              <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-white px-6 sm:px-10 py-3 rounded-lg text-sm sm:text-base font-medium transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Subscribing...
+                </>
+              ) : (
+                <>
+                  <Mail className="h-4 w-4 mr-2" />
+                  Subscribe to Newsletter
+                </>
+              )}
+            </button>
+
 
                   <p className="text-xs text-gray-500 text-center">
                     Free forever. Unsubscribe anytime. We respect your privacy.

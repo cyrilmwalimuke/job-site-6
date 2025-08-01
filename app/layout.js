@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default:'Find Jobs in Kenya',
-    template: '%s | JobsKe',
+    default:'Find Jobs in Kenya'
+  
   },
  
   description: 'Find Your Dream Job Today.Discover thousands of job opportunities with all the information you need. Your next career move starts here.',
