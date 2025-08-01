@@ -2,8 +2,8 @@ import { GiCoinsPile } from "react-icons/gi";
 
 export default async function sitemap() {
 
-    // const baseUrl = "https://jobske.com";
-    const baseUrl = "http://localhost:3000";
+    const baseUrl = "https://jobske.com";
+   
 
 
     
