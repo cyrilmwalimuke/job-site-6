@@ -2,7 +2,11 @@ import { GiCoinsPile } from "react-icons/gi";
 
 export default async function sitemap() {
 
-    const baseUrl = "https://jobske.com";
+    const baseUrl = "https://jobske.com"
+   
+
+ 
+    
    
 
 
@@ -75,16 +79,54 @@ export default async function sitemap() {
       }));
     
   
-      const titlesResponse =await fetch(`${baseUrl}/api/find-jobs`, {
+
+
+        
+    const companiesResponse = await fetch(`${baseUrl}/api/find-jobs`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+    });
+    
+    const companies = await companiesResponse.json();
+    
+    // Create a Map to track unique locations
+    const seenCompanies = new Set();
+    
+    const companyEntries = companies
+      .filter(job => {
+        if (!job.employer_name || seenCompanies.has(job.employer_name)) {
+          return false;
+        }
+        seenCompanies.add(job.employer_name);
+        return true;
+      })
+      .map(job => ({
+        url: `${baseUrl}/jobs/company/${job.employer_name.toLowerCase().replace(/\s+/g, '-')}`,
+        lastModified: new Date(job.updatedAt),
+      }));
+
+
+      const titlesResponse = await fetch(`${baseUrl}/api/find-jobs`, {
         next: { revalidate: 60 },
         method: 'GET',
       });
-    
-        const titles = await titlesResponse.json();
-    
-        const titleEntries = titles.map(job => ({
+      
+      const titles = await titlesResponse.json();
+      
+      // Create a Map to track unique locations
+      const seenTitles = new Set();
+      
+      const titleEntries = titles
+        .filter(job => {
+          if (!job.title || seenTitles.has(job.title)) {
+            return false;
+          }
+          seenTitles.add(job.title);
+          return true;
+        })
+        .map(job => ({
           url: `${baseUrl}/jobs/title/${job.title.toLowerCase().replace(/\s+/g, '-')}`,
-            lastModified: new Date(job.updatedAt),
+          lastModified: new Date(job.updatedAt),
         }));
     
 
@@ -108,14 +150,8 @@ export default async function sitemap() {
         ...searchEntries,
         ...locationEntries,
         ...titleEntries,
-        {
-            url: `${baseUrl}/jobs`,
-            lastModified: new Date(),
-        },
-        {
-            url: `${baseUrl}/blog`,
-            lastModified: new Date(),
-        },
+        ...companyEntries,
+       
         {
             url: `${baseUrl}/search`,
             lastModified: new Date(),
