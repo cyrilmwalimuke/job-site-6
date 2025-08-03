@@ -38,21 +38,21 @@ export default async function sitemap() {
 
 
         
-    const searchResponse =await fetch(`${baseUrl}/api/find-jobs`, {
-      next: { revalidate: 60 },
-      method: 'GET',
-    });
-  const jobSearches = await searchResponse.json();
-  const searchEntries = jobSearches.map(search => {
-    const url = `${baseUrl}/search?page=1&type=&limit=6&salaryRange=&searchTerm=${encodeURIComponent(search.title)}&experienceLevel=&sort=createdAt&order=desc&jobLocation=&industry=`;
+  //   const searchResponse =await fetch(`${baseUrl}/api/find-jobs`, {
+  //     next: { revalidate: 60 },
+  //     method: 'GET',
+  //   });
+  // const jobSearches = await searchResponse.json();
+  // const searchEntries = jobSearches.map(search => {
+  //   const url = `${baseUrl}/search?page=1&type=&limit=6&salaryRange=&searchTerm=${encodeURIComponent(search.title)}&experienceLevel=&sort=createdAt&order=desc&jobLocation=&industry=`;
   
-    return {
-      url: url.replace(/&/g, '&amp;'), // escape & for XML
-      lastModified: new Date(search.updatedAt),
-    };
-  });
+  //   return {
+  //     url: url.replace(/&/g, '&amp;'), // escape & for XML
+  //     lastModified: new Date(search.updatedAt),
+  //   };
+  // });
   
-    console.log(searchEntries)
+  //   console.log(searchEntries)
 
 
     const jobsLocationResponse = await fetch(`${baseUrl}/api/find-jobs`, {
@@ -147,7 +147,7 @@ export default async function sitemap() {
         },
         ...postEntries,
         ...blogEntries,
-        ...searchEntries,
+        // ...searchEntries,
         ...locationEntries,
         ...titleEntries,
         ...companyEntries,
