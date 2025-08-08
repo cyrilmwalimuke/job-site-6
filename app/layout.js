@@ -88,9 +88,9 @@ export default function RootLayout({ children }) {
       >
         {/* <Suspense> */}
         <Header/>
-        {/* {children} */}
+        {children}
 
-        </Suspense>
+        {/* </Suspense> */}
      
         <Footer/>
       </body>
