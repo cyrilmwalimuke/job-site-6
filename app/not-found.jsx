@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { useSearchParams } from 'next/navigation';
+
 
 export default function NotFoundPage() {
-  const searchParams = useSearchParams();
+
   const router = useRouter();
   const [float, setFloat] = useState(true);
 
