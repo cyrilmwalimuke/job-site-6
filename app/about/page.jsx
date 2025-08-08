@@ -1,4 +1,4 @@
-"use client"
+
 import { Users, Target, Heart, Award, Building, Globe, TrendingUp, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

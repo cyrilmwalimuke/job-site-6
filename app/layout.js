@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "./(components)/Header";
 import Footer from "./(components)/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
-// import { Suspense } from "react";
+import { Suspense } from "react";
 import Script from "next/script";
 
 
@@ -86,11 +86,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       
       >
-        {/* <Suspense> */}
+        <Suspense>
         <Header/>
         {children}
 
-        {/* </Suspense> */}
+        </Suspense>
      
         <Footer/>
       </body>
