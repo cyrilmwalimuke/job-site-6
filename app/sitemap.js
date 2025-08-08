@@ -156,10 +156,7 @@ export default async function sitemap() {
             url: `${baseUrl}/search`,
             lastModified: new Date(),
         },
-        {
-            url: `${baseUrl}/about-us`,
-            lastModified: new Date(),
-        },
+     
       
         {
             url: `${baseUrl}/about`,

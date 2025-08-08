@@ -173,7 +173,7 @@ export default async function Job({ params }) {
 
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-8">
-            <div className="bg-white rounded-xl shadow-sm p-6 border">
+            <div className="bg-white rounded-xl shadow-sm p-3 sm:p-6 border">
               <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
                 <div className="h-16 w-16 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0">
                   {jobData.employer_logo ? (
@@ -244,16 +244,16 @@ export default async function Job({ params }) {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm p-6 border">
+            <div className="bg-white rounded-xl shadow-sm p-3 sm:p-6 border">
               <div className="prose max-w-none">
                 <h2 className='font-semibold text-lg'>Job Description</h2>
-                <p>{jobData.description}</p>
+                <p className='text-sm'>{jobData.description}</p>
 
                 <h3 className='font-semibold text-lg mt-3'>Responsibilities</h3>
-                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.responsibilities }} />
+                <div className="prose prose-lg max-w-none text-sm" dangerouslySetInnerHTML={{ __html: jobData.responsibilities }} />
 
-                <h3 className='mt-3 font-semibold text-lg'>Requirements:</h3>
-                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: jobData.education_qualification_experience_skills_traits }} />
+                <h3 className='mt-3 font-semibold text-lg '>Requirements:</h3>
+                <div className="prose prose-lg max-w-none text-sm sm:text-md" dangerouslySetInnerHTML={{ __html: jobData.education_qualification_experience_skills_traits }} />
               </div>
             </div>
 
