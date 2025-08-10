@@ -80,7 +80,13 @@ export default function RootLayout({ children }) {
               logo: "https://jobske.com/site-identity.png",
             }),
           }}
+          
         />
+          <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7076727917397860"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
